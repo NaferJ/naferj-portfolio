@@ -119,7 +119,7 @@ const App: React.FC = () => {
               <span className="text-zed-accent/40">•</span>
               <span>2+ Años Experiencia</span>
               <span className="text-zed-accent/40">•</span>
-              <span>Full Stack Expert</span>
+              <span>Full Stack</span>
             </div>
           </div>
         </section>
