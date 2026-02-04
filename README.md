@@ -17,61 +17,131 @@
 
 ---
 
-## 🚀 Sobre el Proyecto
+## 🚀 About the Project
 
-Este es mi portafolio personal, diseñado con un enfoque en la **claridad visual** y la **eficiencia técnica**. No es solo una carta de presentación, sino una muestra de mi capacidad para construir interfaces modernas con atención al detalle.
+This is my personal portfolio, built with a focus on **visual clarity** and **technical efficiency**. It's not only a resume — it's a showcase of modern interfaces and engineering detail.
 
-### ✨ Características Principales
+### ✨ Key Features
 
-- **Estética Zed.dev**: Grid dinámico, tipografía Lora/Inter y sistema de "remaches" (CornerMarkers) para una sensación técnica premium.
-- **Asistente IA Integrado**: Chatbot interactivo alimentado por el SDK de **Google Gemini** para responder dudas sobre mi stack y experiencia.
-- **Proyecto Destacado**: Showcase detallado de **Luisardito Shop**, incluyendo métricas de rendimiento y stack real (React, Node.js, Express, MySQL).
-- **Arquitectura Limpia**: Código modular y tipado estrictamente con TypeScript.
-- **Responsive Design**: Optimizado para cualquier dispositivo, manteniendo la integridad del diseño en móvil y escritorio.
+- **Zed.dev Aesthetic:** Dynamic grid, Lora/Inter typography, and a riveted header (CornerMarkers) for a premium technical feel.
+- **AI Assistant:** Interactive chatbot powered by the Google Gemini SDK to answer questions about my stack and experience.
+- **Featured Project:** Detailed showcase of **Luisardito Shop**, including performance metrics and the real stack (React, Node.js, Express, MySQL).
+- **Clean Architecture:** Modular codebase with TypeScript types and clear separation of concerns.
+- **Responsive:** Optimized across devices while preserving the design intent on mobile and desktop.
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Tech Stack
 
 - **Frontend:** React 19, TypeScript, Tailwind CSS.
-- **IA:** @google/genai (Gemini 3 Flash).
-- **Tipografía:** Lora (Serif) & JetBrains Mono.
-- **Herramientas:** VS Code, Git, Docker, Vercel.
+- **AI:** @google/genai (Gemini 3 Flash).
+- **Typography:** Lora (Serif) & JetBrains Mono.
+- **Tools:** VS Code, Git, Docker, Vercel.
 
-## 📦 Estructura del Repositorio
+```markdown
+
+<div align="center">
+  <img width="1200" alt="NaferJ Portfolio Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+
+  <p align="center">
+    <strong>Full Stack Developer Portfolio</strong><br />
+    Inspired by the visual style of <a href="https://zed.dev">Zed.dev</a>. Minimal, high-performance, and AI-augmented.
+  </p>
+
+  <p align="center">
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind" />
+    <img src="https://img.shields.io/badge/Gemini_AI-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Gemini" />
+  </p>
+</div>
+
+---
+
+## 🚀 About the Project
+
+This is my personal portfolio, built with a focus on **visual clarity** and **technical efficiency**. It's not only a resume — it's a showcase of modern interfaces and engineering detail.
+
+### ✨ Key Features
+
+- **Zed.dev Aesthetic:** Dynamic grid, Lora/Inter typography, and a riveted header (CornerMarkers) for a premium technical feel.
+- **AI Assistant:** Interactive chatbot powered by the Google Gemini SDK to answer questions about my stack and experience.
+- **Featured Project:** Detailed showcase of **Luisardito Shop**, including performance metrics and the real stack (React, Node.js, Express, MySQL).
+- **Clean Architecture:** Modular codebase with TypeScript types and clear separation of concerns.
+- **Responsive:** Optimized across devices while preserving the design intent on mobile and desktop.
+```markdown
+
+<div align="center">
+  <img width="1200" alt="NaferJ Portfolio Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+
+  <p align="center">
+    <strong>Full Stack Developer Portfolio</strong><br />
+    Inspired by the visual style of <a href="https://zed.dev">Zed.dev</a>. Minimal, high-performance, and AI-augmented.
+  </p>
+
+  <p align="center">
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind" />
+    <img src="https://img.shields.io/badge/Gemini_AI-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Gemini" />
+  </p>
+</div>
+
+---
+
+## 🚀 About the Project
+
+This is my personal portfolio, built with a focus on **visual clarity** and **technical efficiency**. It's not only a resume — it's a showcase of modern interfaces and engineering detail.
+
+### ✨ Key Features
+
+- **Zed.dev Aesthetic:** Dynamic grid, Lora/Inter typography, and a riveted header (CornerMarkers) for a premium technical feel.
+- **AI Assistant:** Interactive chatbot powered by the Google Gemini SDK to answer questions about my stack and experience.
+- **Featured Project:** Detailed showcase of **Luisardito Shop**, including performance metrics and the real stack (React, Node.js, Express, MySQL).
+- **Clean Architecture:** Modular codebase with TypeScript types and clear separation of concerns.
+- **Responsive:** Optimized across devices while preserving the design intent on mobile and desktop.
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React 19, TypeScript, Tailwind CSS.
+- **AI:** @google/genai (Gemini 3 Flash).
+- **Typography:** Lora (Serif) & JetBrains Mono.
+- **Tools:** VS Code, Git, Docker, Vercel.
+
+## 📦 Repository Structure
 
 ```text
-├── components/          # Componentes visuales (Header, Assistant, CornerMarkers)
-├── services/            # Lógica de integración con la API de Gemini
-├── constants.tsx        # Datos de proyectos y experiencias (Single Source of Truth)
-├── types.ts             # Definiciones de tipos globales
-├── index.html           # Punto de entrada con configuración de Tailwind
-└── App.tsx              # Layout principal y secciones
+├── components/          # Visual components (Header, Assistant, CornerMarkers)
+├── services/            # Integration logic with Gemini API
+├── constants.tsx        # Projects and experiences data (single source of truth)
+├── types.ts             # Global type definitions
+├── index.html           # Entry with Tailwind config
+└── App.tsx              # Main layout and sections
 ```
 
-## ⚙️ Configuración Local
+## ⚙️ Local Setup
 
-1.  **Clonar el repo:**
+1.  **Clone the repo:**
     ```bash
     git clone https://github.com/naferj/naferj-portfolio.git
     cd naferj-portfolio
     ```
 
-2.  **Instalar dependencias:**
+2.  **Install dependencies:**
     ```bash
     npm install
     ```
 
-3.  **Variables de Entorno:**
-    Crea un archivo `.env` o configura tu entorno con:
-    `API_KEY=tu_clave_de_google_ai_studio`
+3.  **Environment variables:**
+    Create a `.env` file or configure your environment with:
+    `API_KEY=your_google_ai_studio_key`
 
-4.  **Ejecutar:**
+4.  **Run development server:**
     ```bash
     npm run dev
     ```
 
-## 📬 Contacto
+## 📬 Contact
 
-Si estás buscando un desarrollador enfocado en calidad, rendimiento e innovación, ¡hablemos!
+If you're looking for a developer focused on quality, performance and innovation, let's connect!
 
 - **Email:** [naferjml@gmail.com](mailto:naferjml@gmail.com)
 - **LinkedIn:** [linkedin.com/in/naferj](https://linkedin.com/in/naferj)
@@ -80,5 +150,7 @@ Si estás buscando un desarrollador enfocado en calidad, rendimiento e innovaci�
 ---
 
 <div align="center">
-  <p size="2">Hecho con ❤️ por NaferJ</p>
+  <p size="2">Made with ❤️ by NaferJ</p>
 </div>
+
+```

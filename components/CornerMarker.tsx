@@ -6,7 +6,7 @@ interface CornerMarkerProps {
 }
 
 const CornerMarker: React.FC<CornerMarkerProps> = ({ position }) => {
-  // Para un tamaño de 8px (size-2), el offset ideal para centrar en la esquina es -4px
+  // For an 8px size (size-2), the ideal offset to center in the corner is -4px
   const positionClasses = {
     'top-left': '-top-[4px] -left-[4px]',
     'top-right': '-top-[4px] -right-[4px]',

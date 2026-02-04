@@ -14,7 +14,7 @@ const App: React.FC = () => {
     return () => clearInterval(t);
   }, [paused, screenshots.length]);
 
-  // Keyboard shortcuts: P => Proyectos, G => GitHub, H => Hablemos
+  // Keyboard shortcuts: P => Projects, G => GitHub, H => Let's talk
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       // ignore when using modifiers or typing in inputs
@@ -25,7 +25,7 @@ const App: React.FC = () => {
 
       const key = (e.key || '').toLowerCase();
       if (key === 'p') {
-        const el = document.querySelector('a[href="#proyectos"]') as HTMLAnchorElement | null;
+        const el = document.querySelector('a[href="#projects"]') as HTMLAnchorElement | null;
         if (el) { el.click(); e.preventDefault(); }
       } else if (key === 'g') {
         const el = document.querySelector('a[href*="github.com/naferj"]') as HTMLAnchorElement | null;
@@ -47,11 +47,11 @@ const App: React.FC = () => {
       <div className="fixed inset-y-0 left-0 w-3 border-r border-zed-border/50 bg-zed-bg/50 md:w-8 lg:w-12 z-30" />
       <div className="fixed inset-y-0 right-0 w-3 border-l border-zed-border/50 bg-zed-bg/50 md:w-8 lg:w-12 z-30" />
 
-      {/* HEADER REESTRUCTURADO (Zed Style) */}
+      {/* HEADER RESTRUCTURED (Zed Style) */}
       <header className="sticky top-0 z-50 h-[57px] w-full flex items-center justify-center border-t border-zed-border sm:border-t-0">
         <div className="relative h-full w-full mx-3 md:mx-8 lg:mx-12 border-x border-b border-zed-border bg-zed-bg/80 backdrop-blur-md">
           <div className="mx-auto flex h-full max-w-[1100px] items-center justify-between px-4 md:px-6 relative border-x border-zed-border/50">
-            {/* Remaches en la base del Header con la columna central */}
+            {/* Rivets at header base with central column */}
             <CornerMarker position="bottom-left" />
             <CornerMarker position="bottom-right" />
 
@@ -65,9 +65,9 @@ const App: React.FC = () => {
             </div>
 
             <nav className="hidden items-center gap-6 text-sm font-medium text-zed-muted md:flex">
-              <a href="#proyectos" className="hover:text-white transition-colors">Proyectos</a>
+              <a href="#projects" className="hover:text-white transition-colors">Projects</a>
               <a href="#skills" className="hover:text-white transition-colors">Stack</a>
-              <a href="#experiencia" className="hover:text-white transition-colors">Exp</a>
+              <a href="#experience" className="hover:text-white transition-colors">Experience</a>
               
               <div className="h-4 w-px bg-zed-border" />
               
@@ -84,7 +84,7 @@ const App: React.FC = () => {
               </div>
 
               <a href="mailto:naferjml@gmail.com" className="group flex items-center gap-2 text-white hover:text-zed-accent transition-colors">
-                Hablemos
+                Let's talk
                 <kbd className="rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-[10px] opacity-50 font-bold tracking-tighter">H</kbd>
               </a>
             </nav>
@@ -105,12 +105,12 @@ const App: React.FC = () => {
                 <span className="text-zed-accent italic">again</span>
               </h1>
               <p className="mx-auto max-w-xl text-balance text-lg text-zed-muted sm:text-xl">
-                <a href="https://linkedin.com/in/naferj" target="_blank" className="text-zed-accent underline decoration-zed-accent/40 underline-offset-2 hover:decoration-zed-accent transition-all font-semibold">NaferJ</a> es un desarrollador Full Stack especializado en e-commerce e integraciones API de alto rendimiento.
+                <a href="https://linkedin.com/in/naferj" target="_blank" className="text-zed-accent underline decoration-zed-accent/40 underline-offset-2 hover:decoration-zed-accent transition-all font-semibold">NaferJ</a> is a Full Stack developer specializing in high-performance e-commerce and API integrations.
               </p>
               
               <div className="flex flex-col items-center justify-center gap-3 pt-8 sm:flex-row">
-                <a href="#proyectos" className="group flex items-center gap-2 rounded-sm bg-zed-accent px-6 py-2.5 text-sm font-medium text-white shadow-[0_2px_0_0_rgba(255,255,255,0.1)_inset] hover:bg-blue-600 transition-all">
-                  Ver Proyectos
+                <a href="#projects" className="group flex items-center gap-2 rounded-sm bg-zed-accent px-6 py-2.5 text-sm font-medium text-white shadow-[0_2px_0_0_rgba(255,255,255,0.1)_inset] hover:bg-blue-600 transition-all">
+                  View Projects
                   <kbd className="hidden rounded bg-white/20 px-1.5 py-0.5 text-[10px] sm:inline-block font-bold">P</kbd>
                 </a>
                 <a href="https://github.com/naferj" target="_blank" className="group flex items-center gap-2 rounded-sm border border-zed-border bg-zed-card px-6 py-2.5 text-sm font-medium text-white hover:border-zed-muted transition-all">
@@ -123,7 +123,7 @@ const App: React.FC = () => {
             <div className="mt-20 flex flex-wrap justify-center gap-6 text-[10px] font-mono uppercase tracking-[0.25em] text-zed-muted/60">
               <span>Barranquilla, CO</span>
               <span className="text-zed-accent/40">•</span>
-              <span>2+ Años Experiencia</span>
+              <span>2+ Years Experience</span>
               <span className="text-zed-accent/40">•</span>
               <span>Full Stack</span>
             </div>
@@ -133,7 +133,7 @@ const App: React.FC = () => {
         <SlashDivider />
 
         {/* FEATURED PROJECT */}
-        <section id="proyectos" className="relative p-6 py-24 md:p-12 md:py-32 scroll-mt-[57px]">
+        <section id="projects" className="relative p-6 py-24 md:p-12 md:py-32 scroll-mt-[57px]">
           <div className="absolute inset-0 grid-pattern mask-vignette opacity-10 pointer-events-none" />
           
           <div className="relative grid grid-cols-1 gap-16 lg:grid-cols-12">
@@ -141,14 +141,14 @@ const App: React.FC = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-2 font-mono text-[10px] font-bold text-zed-accent uppercase tracking-widest">
                   <span className="size-1.5 rounded-full bg-zed-accent animate-pulse" />
-                  Proyecto Destacado
+                  Featured Project
                 </div>
                 <h2 className="font-lora text-4xl font-medium text-white md:text-5xl tracking-tight">Luisardito Shop</h2>
                 <p className="text-lg leading-relaxed text-zed-muted text-pretty italic">
-                  "Gana. Canjea. Disfruta."
+                  "Win. Redeem. Enjoy."
                 </p>
                 <p className="text-md leading-relaxed text-zed-muted text-pretty">
-                  Plataforma de rewards de alto rendimiento integrada con la API de Kick.com. Construida para manejar miles de transacciones de puntos y rankings en tiempo real.
+                  High-performance rewards platform integrated with the Kick.com API. Built to handle thousands of point transactions and live leaderboards in real-time.
                 </p>
               </div>
 
@@ -169,7 +169,7 @@ const App: React.FC = () => {
 
               <div className="pt-4">
                 <a href={PROJECTS[0].link} target="_blank" className="group inline-flex items-center gap-2 text-sm font-medium text-zed-accent hover:text-white transition-colors">
-                  Explorar plataforma en vivo
+                  Explore live platform
                   <svg xmlns="http://www.w3.org/2000/svg" className="size-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                 </a>
               </div>
@@ -218,14 +218,14 @@ const App: React.FC = () => {
         </section>
 
         {/* EXPERIENCE SECTION */}
-        <section id="experiencia" className="relative p-6 py-24 md:p-12 md:py-32 scroll-mt-[57px]">
+        <section id="experience" className="relative p-6 py-24 md:p-12 md:py-32 scroll-mt-[57px]">
           <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
             <div className="md:col-span-4">
               <div className="sticky top-32 space-y-4">
-                <span className="font-mono text-[10px] text-zed-muted uppercase tracking-widest font-bold">Trayectoria</span>
-                <h2 className="font-lora text-4xl font-medium text-white tracking-tight">Experiencia</h2>
+                <span className="font-mono text-[10px] text-zed-muted uppercase tracking-widest font-bold">Background</span>
+                <h2 className="font-lora text-4xl font-medium text-white tracking-tight">Experience</h2>
                 <p className="text-zed-muted max-w-xs text-sm leading-relaxed">
-                  Historial construyendo aplicaciones e-commerce empresariales y sistemas escalables.
+                  Track record building enterprise e-commerce applications and scalable systems.
                 </p>
               </div>
             </div>
@@ -269,17 +269,17 @@ const App: React.FC = () => {
         <SlashDivider />
 
         {/* CTA FOOTER */}
-        <section id="contactar" className="relative px-6 py-32 text-center overflow-hidden">
+        <section id="contact" className="relative px-6 py-32 text-center overflow-hidden">
           <div className="absolute inset-0 grid-pattern mask-vignette opacity-20 pointer-events-none" />
           
           <div className="relative z-10 max-w-2xl mx-auto space-y-8">
-            <h2 className="font-lora text-4xl font-medium text-white md:text-6xl tracking-tight">¿Hablamos de tu próximo <span className="text-zed-accent italic">gran proyecto</span>?</h2>
+            <h2 className="font-lora text-4xl font-medium text-white md:text-6xl tracking-tight">Shall we talk about your next <span className="text-zed-accent italic">big project</span>?</h2>
             <p className="text-zed-muted text-lg">
-              Disponible para oportunidades semi-senior y colaboraciones innovadoras.
+              Available for mid-level opportunities and innovative collaborations.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="mailto:naferjml@gmail.com" className="rounded-sm bg-zed-accent px-8 py-3 text-sm font-medium text-white hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/10">
-                Enviar Email
+                <a href="mailto:naferjml@gmail.com" className="rounded-sm bg-zed-accent px-8 py-3 text-sm font-medium text-white hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/10">
+                Send Email
               </a>
               <a href="https://linkedin.com/in/naferj" target="_blank" className="rounded-sm border border-zed-border bg-zed-card px-8 py-3 text-sm font-medium text-white hover:border-zed-muted transition-all">
                 LinkedIn
@@ -301,7 +301,7 @@ const App: React.FC = () => {
               <span className="font-lora text-lg font-medium text-white">NaferJ</span>
             </div>
             <p className="text-xs text-zed-muted max-w-[200px] leading-relaxed italic">
-              Construyendo herramientas web eficientes y escalables. 2026.
+              Building efficient, scalable web tools. 2026.
             </p>
           </div>
           
