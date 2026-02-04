@@ -60,7 +60,7 @@ const App: React.FC = () => {
                 <div className="flex size-7 items-center justify-center rounded-sm border border-blue-500/20 bg-zed-card font-mono text-xs font-bold text-zed-accent group-hover:scale-105 transition-transform overflow-hidden">
                   <img src="/profile/avatar.png" alt="NaferJ" className="w-full h-full object-cover" />
                 </div>
-                <span className="font-lora text-lg font-medium tracking-tight text-white">NaferJ.dev</span>
+                <span className="font-lora text-lg font-medium tracking-tight text-white">NaferJ</span>
               </a>
             </div>
 
