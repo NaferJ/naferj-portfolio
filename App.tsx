@@ -7,11 +7,12 @@ import { PROJECTS, EXPERIENCES, SKILLS } from './constants';
 const App: React.FC = () => {
   const screenshots = ['/screenshots/captura1.png', '/screenshots/captura2.png', '/screenshots/captura3.png'];
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    const t = setInterval(() => setCurrent(c => (c + 1) % screenshots.length), 15000);
+    const t = setInterval(() => setCurrent(c => (paused ? c : (c + 1) % screenshots.length)), 15000);
     return () => clearInterval(t);
-  }, []);
+  }, [paused, screenshots.length]);
 
   // Keyboard shortcuts: P => Proyectos, G => GitHub, H => Hablemos
   useEffect(() => {
@@ -171,13 +172,13 @@ const App: React.FC = () => {
             <div className="lg:col-span-7 order-1 lg:order-2">
               <div className="group relative overflow-hidden rounded-sm border border-zed-border bg-zed-card p-2 shadow-2xl transition-all hover:border-zed-accent/40">
                 <div className="aspect-video w-full overflow-hidden rounded-xs bg-[#1a1a1a]">
-                  <div className="relative w-full h-full">
+                  <div className="relative w-full h-full" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
                     {screenshots.map((s, i) => (
                       <img
                         key={s}
                         src={s}
                         alt={`Luisardito screenshot ${i + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-800 filter grayscale ${i === current ? 'opacity-100' : 'opacity-0'} mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-800 filter grayscale ${i === current ? 'opacity-100' : 'opacity-0'} mix-blend-luminosity`}
                       />
                     ))}
                     <div className="absolute inset-0 bg-gradient-to-t from-zed-bg/60 via-transparent to-transparent pointer-events-none" />
