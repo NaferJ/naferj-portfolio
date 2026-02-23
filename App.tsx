@@ -83,7 +83,7 @@ const App: React.FC = () => {
                 </a>
               </div>
 
-              <a href="mailto:naferjml@gmail.com" className="group flex items-center gap-2 text-white hover:text-zed-accent transition-colors">
+              <a href="mailto:dev@naferj.com" className="group flex items-center gap-2 text-white hover:text-zed-accent transition-colors">
                 Let's talk
                 <kbd className="rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-[10px] opacity-50 font-bold tracking-tighter">H</kbd>
               </a>
@@ -278,7 +278,7 @@ const App: React.FC = () => {
               Available for mid-level opportunities and innovative collaborations.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-                <a href="mailto:naferjml@gmail.com" className="rounded-sm bg-zed-accent px-8 py-3 text-sm font-medium text-white hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/10">
+                <a href="mailto:dev@naferj.com" className="rounded-sm bg-zed-accent px-8 py-3 text-sm font-medium text-white hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/10">
                 Send Email
               </a>
               <a href="https://linkedin.com/in/naferj" target="_blank" className="rounded-sm border border-zed-border bg-zed-card px-8 py-3 text-sm font-medium text-white hover:border-zed-muted transition-all">
@@ -309,7 +309,7 @@ const App: React.FC = () => {
             <a href="https://github.com/naferj" className="hover:text-white transition-colors" target="_blank">GITHUB ↗</a>
             <a href="https://linkedin.com/in/naferj" className="hover:text-white transition-colors" target="_blank">LINKEDIN ↗</a>
             <a href="https://x.com/NaferJ1" className="hover:text-white transition-colors" target="_blank">X / TWITTER ↗</a>
-            <a href="mailto:naferjml@gmail.com" className="hover:text-white transition-colors underline decoration-zed-accent underline-offset-4">EMAIL ↓</a>
+            <a href="mailto:dev@naferj.com" className="hover:text-white transition-colors underline decoration-zed-accent underline-offset-4">EMAIL ↓</a>
           </div>
         </div>
       </footer>

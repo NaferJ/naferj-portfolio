@@ -143,7 +143,7 @@ This is my personal portfolio, built with a focus on **visual clarity** and **te
 
 If you're looking for a developer focused on quality, performance and innovation, let's connect!
 
-- **Email:** [naferjml@gmail.com](mailto:naferjml@gmail.com)
+- **Email:** [dev@naferj.com](mailto:dev@naferj.com)
 - **LinkedIn:** [linkedin.com/in/naferj](https://linkedin.com/in/naferj)
 - **X (Twitter):** [@NaferJ1](https://x.com/NaferJ1)
 
