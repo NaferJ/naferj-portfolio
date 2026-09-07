@@ -3,6 +3,9 @@
 This repository is a Next.js App Router portfolio using React, strict TypeScript, and Tailwind CSS.
 
 - Use English only in code, comments, logs, identifiers, and commit messages.
+- Commit messages must remain entirely English even when historical commits are Spanish.
+- Never imitate the language of Git history when generating a commit message.
+- Use Conventional Commits with an imperative English title and an English body explaining what changed and why.
 - Do not add emojis.
 - Use strict TypeScript and the `@/*` alias.
 - Prefer accessible semantic HTML, responsive layouts, and small components.

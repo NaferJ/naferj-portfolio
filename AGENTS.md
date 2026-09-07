@@ -30,6 +30,7 @@ Do not invent issue or PR formats. The assistant never commits, pushes, rewrites
 ## Code conventions
 
 - English only in code, comments, logs, identifiers, and commit messages.
+- Commit generators must ignore historical Spanish commits and always produce an English title and body.
 - No emojis in code, logs, comments, or documentation.
 - Strict TypeScript. Do not use `any` or non-null assertions to silence errors.
 - Use the `@/*` alias for imports from `src/*`.
