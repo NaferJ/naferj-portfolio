@@ -1,0 +1,19 @@
+name: Project Auto Add
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue to project board
+        uses: actions/add-to-project@v2.0.0
+        with:
+          project-url: https://github.com/users/NaferJ/projects/14
+          github-token: ${{ secrets.PROJECT_PAT }}
