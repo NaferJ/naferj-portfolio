@@ -11,7 +11,7 @@ const OPACITY_FOR_LEVEL = {
   4: 1,
 } as const;
 
-const CELL_SIZE = 11;
+const CELL_SIZE = 11.8;
 const CELL_GAP = 3;
 
 type TooltipState = {
@@ -62,9 +62,13 @@ export function HeatmapClient({
   }, []);
 
   return (
-    <div className="relative" role="img" aria-label={`${total} contributions`}>
+    <div
+      className="relative w-full"
+      role="img"
+      aria-label={`${total} contributions`}
+    >
       <div
-        className="flex justify-center overflow-hidden"
+        className="flex justify-end overflow-hidden"
         style={{ gap: CELL_GAP }}
       >
         {weeks.map((week, weekIndex) => (

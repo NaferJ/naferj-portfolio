@@ -9,8 +9,8 @@ export default function Home() {
         aria-label="Primary navigation"
         className="hidden min-h-dvh border-x border-[var(--rail)] lg:block"
       />
-      <main className="min-h-dvh min-w-0 px-6 py-16 sm:px-10 sm:py-20 lg:px-8 lg:py-28">
-        <div className="space-y-16">
+      <main className="min-h-dvh min-w-0 px-5 py-16 sm:px-10 sm:py-20 lg:px-8 lg:py-28">
+        <div className="space-y-8">
           <Intro />
           <Contributions />
         </div>

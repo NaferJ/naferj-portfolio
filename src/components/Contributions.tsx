@@ -19,7 +19,7 @@ export async function Contributions() {
 
   return (
     <section>
-      <div className="relative max-w-full overflow-hidden rounded-[28px] bg-black p-6 pb-[76px]">
+      <div className="relative max-w-full overflow-hidden rounded-[28px] bg-black p-4 pb-[76px]">
         <p className="mb-4 px-1.5 text-base font-medium text-neutral-200">
           {formatNumber(data.total)} contributions in {data.yearLabel}
         </p>
