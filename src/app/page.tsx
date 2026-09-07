@@ -1,3 +1,4 @@
+import { Contributions } from "@/components/Contributions";
 import { Intro } from "@/components/Intro";
 
 export default function Home() {
@@ -9,7 +10,10 @@ export default function Home() {
         className="hidden min-h-dvh border-x border-[var(--rail)] lg:block"
       />
       <main className="min-h-dvh min-w-0 px-6 py-16 sm:px-10 sm:py-20 lg:px-8 lg:py-28">
-        <Intro />
+        <div className="space-y-16">
+          <Intro />
+          <Contributions />
+        </div>
       </main>
       <aside
         aria-label="Secondary navigation"
