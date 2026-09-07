@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --rail: #242424;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  min-height: 100%;
+  background: var(--background);
 }
 
 body {
+  min-height: 100%;
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: rgb(255 255 255 / 16%);
+}
+
+.rotating-word-frame {
+  position: relative;
+  display: inline-grid;
+  margin-inline: 0.1em;
+  color: var(--foreground);
+  white-space: nowrap;
+  font-weight: 600;
+  vertical-align: baseline;
+}
+
+.rotating-word {
+  grid-area: 1 / 1;
+  position: relative;
+  width: max-content;
+}
+
+.rotating-word-underline {
+  position: absolute;
+  right: 0;
+  bottom: -0.08em;
+  left: 0;
+  height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='14'%20height='6'%20viewBox='0%200%2014%206'%3E%3Cpath%20d='M0%203%20Q%203.5%200%207%203%20T%2014%203'%20fill='none'%20stroke='rgba(255,255,255,0.72)'%20stroke-width='1.75'%20stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  clip-path: inset(0 0 0 0);
+  pointer-events: none;
+}
+
+.rotating-word-visible {
+  opacity: 1;
+}
+
+.rotating-word-exiting {
+  animation: word-fade-out 220ms ease-in both;
+}
+
+.rotating-word-exiting .rotating-word-underline {
+  animation: squiggle-out 220ms ease-in both;
+}
+
+.rotating-word-entering {
+  animation: word-fade-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rotating-word-entering .rotating-word-underline {
+  animation: squiggle-in 380ms 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes word-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes word-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes squiggle-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes squiggle-out {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+
+  to {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-word,
+  .rotating-word-underline {
+    animation: none;
+    clip-path: inset(0 0 0 0);
+  }
 }
