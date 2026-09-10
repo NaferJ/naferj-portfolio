@@ -34,11 +34,11 @@ export function HeatmapClient({ weeks, total }: { weeks: ContributionSummary["we
     <div role="group" aria-label={`Contribution activity; ${total} contributions in the last year`}>
       <p id="heatmap-instructions" className="sr-only">Use arrow keys to explore daily activity. Home and End jump to the first and last day.</p>
       <div ref={scroller} className="overflow-x-auto py-1" onMouseLeave={() => setSelected(null)}>
-        <div className="flex min-w-max gap-[3px]">
+        <div className="flex min-w-max w-full gap-[3px]">
           {weeks.map((week, index) => (
-            <div key={week.days[0]?.date ?? index} className="flex flex-col gap-[3px]">
+            <div key={week.days[0]?.date ?? index} className="flex flex-1 flex-col gap-[3px]">
               {week.days.map((day) => (
-                <button key={day.date} ref={(node) => { if (node) buttons.current.set(day.date, node); else buttons.current.delete(day.date); }} type="button" tabIndex={day.date === activeDate ? 0 : -1} aria-label={describe(day)} aria-describedby="heatmap-instructions" title={describe(day)} onFocus={() => { setActiveDate(day.date); setSelected(day); }} onBlur={() => setSelected(null)} onMouseEnter={() => setSelected(day)} onClick={() => setSelected(day)} onKeyDown={(event) => navigate(event, day)} className="size-[11px] shrink-0 rounded-[2px] bg-highlight" style={{ opacity: OPACITY_FOR_LEVEL[day.level] }} />
+                <button key={day.date} ref={(node) => { if (node) buttons.current.set(day.date, node); else buttons.current.delete(day.date); }} type="button" tabIndex={day.date === activeDate ? 0 : -1} aria-label={describe(day)} aria-describedby="heatmap-instructions" title={describe(day)} onFocus={() => { setActiveDate(day.date); setSelected(day); }} onBlur={() => setSelected(null)} onMouseEnter={() => setSelected(day)} onClick={() => setSelected(day)} onKeyDown={(event) => navigate(event, day)} className="aspect-square w-full rounded-[2px] bg-highlight" style={{ opacity: OPACITY_FOR_LEVEL[day.level] }} />
               ))}
             </div>
           ))}

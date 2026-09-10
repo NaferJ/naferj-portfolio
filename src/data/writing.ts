@@ -27,123 +27,39 @@ export const publications: Publication[] = [];
 
 export const posts: Post[] = [
   {
-    slug: "build-a-smaller-first-version",
-    title: "Build a smaller first version",
+    slug: "why-my-portfolio-looks-simple",
+    title: "Why my portfolio looks simple",
     description:
-      "A working feature teaches you more than a perfect plan. Some notes on making room for the first useful version.",
-    date: "2026-09-01",
-    category: "Building",
-    sample: true,
-    body: [
-      {
-        type: "paragraph",
-        text: "Every project starts with more possibilities than time. The tempting response is to design a system that can accommodate all of them. A more useful response is to choose one thing the system should do well, and make that thing real.",
-      },
-      { type: "heading", id: "one-clear-job", text: "Give it one clear job" },
-      {
-        type: "paragraph",
-        text: "Before choosing a stack, write down the smallest outcome that would help someone. Not a list of features. An outcome. A person can find a piece of information, complete a task, or understand a decision without needing you to explain it.",
-      },
-      {
-        type: "quote",
-        text: "A smaller scope is not a lower standard. It is a way to give the important parts enough attention.",
-      },
-      { type: "heading", id: "make-it-complete", text: "Small, but complete" },
-      {
-        type: "paragraph",
-        text: "Small does not mean unfinished. A useful first version still handles the empty state, explains an error, and works on a phone. Cut whole features before cutting the care that makes the remaining features usable.",
-      },
-      {
-        type: "list",
-        items: [
-          "Make the primary action obvious.",
-          "Handle the case where there is no data yet.",
-          "Use the keyboard to walk through the entire flow.",
-          "Keep the setup simple enough to explain in a few sentences.",
-        ],
-      },
-      { type: "heading", id: "leave-room-to-learn", text: "Leave room to learn" },
-      {
-        type: "paragraph",
-        text: "The first release is a question, not a verdict. Put it in front of someone, watch where they hesitate, and use that information to decide what comes next. The best next feature is often smaller than the one you imagined.",
-      },
-    ],
-  },
-  {
-    slug: "documentation-is-part-of-the-interface",
-    title: "Documentation is part of the interface",
-    description:
-      "The README, the error message, and the onboarding guide are all places where people meet your software.",
-    date: "2026-08-18",
-    category: "Engineering",
-    sample: true,
-    body: [
-      {
-        type: "paragraph",
-        text: "A product does not end at its buttons. People also interact with installation instructions, API responses, and the explanation someone left next to an unfamiliar decision. Those surfaces deserve the same care as the screen.",
-      },
-      { type: "heading", id: "start-with-the-reader", text: "Start with the reader" },
-      {
-        type: "paragraph",
-        text: "A good guide begins where the reader is, not where the author finished. State the prerequisites, show a minimal working path, and make it clear what success looks like. Save the architectural tour for after the first successful run.",
-      },
-      {
-        type: "code",
-        language: "shell",
-        text: "npm ci\nnpm run dev",
-      },
-      {
-        type: "paragraph",
-        text: "Two commands are useful only when the surrounding text explains where to run them, which environment they require, and what should happen next. Commands without context are not an onboarding experience.",
-      },
-      { type: "heading", id: "explain-decisions", text: "Explain the decisions" },
-      {
-        type: "list",
-        items: [
-          "Describe why a constraint exists, not just that it exists.",
-          "Keep examples small enough to test.",
-          "Put instructions close to the code or workflow they describe.",
-          "Remove obsolete steps when the implementation changes.",
-        ],
-      },
-      { type: "heading", id: "maintain-the-interface", text: "Maintain the interface" },
-      {
-        type: "paragraph",
-        text: "Documentation work is product work. When an instruction fails, the reader experiences a bug. Reviewing the guide alongside a change is a small habit that prevents a surprising amount of friction.",
-      },
-    ],
-  },
-  {
-    slug: "a-quieter-corner-of-the-internet",
-    title: "A quieter corner of the internet",
-    description:
-      "On keeping a personal website small, useful, and a little more personal than a feed.",
-    date: "2026-08-02",
+      "Not because I can't do more. Because it's honest about what I actually build, and it lets the work speak instead of the decoration.",
+    date: "2026-09-10",
     category: "Notes",
-    sample: true,
     body: [
       {
         type: "paragraph",
-        text: "A personal website can be an archive rather than a performance. It can hold the projects that mattered, ideas that are still taking shape, and enough context for someone to understand the person behind the work.",
+        text: "Honestly — it depends. There are portfolios out there with 3D components, custom animations, a lot of visual craft. I'm not against that. I just build differently.",
       },
-      { type: "heading", id: "make-space", text: "Make space for the work" },
+      { type: "heading", id: "where-my-weight-actually-is", text: "Where my weight actually is" },
       {
         type: "paragraph",
-        text: "Good typography, a clear structure, and a few thoughtful details do a lot. The layout should make reading easier rather than compete for attention. A page does not need to move constantly to feel alive.",
+        text: "I'm more comfortable building logic and complex structure than chasing a cool frontend design. Most of what I build is structure pages, business frontends — the kind of work where the backend carries more weight than the visuals ever will. So when it came time to build my own portfolio, it made sense to build it the way I actually build things, not the way a portfolio is 'supposed' to look.",
       },
       {
         type: "quote",
-        text: "The internet is big enough for a website that is simply a place to keep your work.",
+        text: "I wanted people to know who built it, and what I actually do. Not something forced, and not something I paid someone else to make look impressive.",
       },
-      { type: "heading", id: "keep-it-maintainable", text: "Keep it maintainable" },
+      { type: "heading", id: "building-it-yourself-still-matters", text: "Building it yourself still matters" },
       {
         type: "paragraph",
-        text: "Choose a publishing process you will actually use. A simple file that you update regularly is more valuable than an elaborate system you avoid. Add tools when they solve a real problem, not because every website seems to have them.",
+        text: "What matters more to me than a flashy result is that it's mine. Even now, when using agents and AI to build is basically normal — and it's only going to get more normal — the thing that still separates people isn't who has access to the tools. It's who can actually recognize when the AI got something wrong, and fix it by hand.",
       },
-      { type: "heading", id: "let-it-grow", text: "Let it grow slowly" },
       {
         type: "paragraph",
-        text: "Start with a short introduction and something worth sharing. Add a note when you learn something useful. Over time, the collection becomes a record of how your thinking and your craft have changed.",
+        text: "That's the skill I think matters most going forward: not prompting well, but debugging well. Knowing when the output is wrong, and knowing enough to catch it.",
+      },
+      { type: "heading", id: "so-simple", text: "So, simple." },
+      {
+        type: "paragraph",
+        text: "Not because I can't do more. Because it's honest about what I actually build, and it lets the work speak instead of the decoration.",
       },
     ],
   },

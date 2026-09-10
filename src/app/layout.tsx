@@ -1,7 +1,21 @@
+import { Inter } from "next/font/google";
 import { routing } from "@/i18n/routing";
+import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <html lang="en">
+      <body className={`${inter.variable} antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
 }
 
 export function generateStaticParams() {

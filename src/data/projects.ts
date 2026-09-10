@@ -18,6 +18,7 @@ export const projects: Project[] = [
     type: "web",
     year: "2026",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    href: "https://naferj.com",
     sections: [
       {
         title: "A place for the work",
@@ -34,31 +35,49 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "service-health-monitor",
-    name: "Service health monitor",
-    description: "An example case study for a small tool that makes service health easier to understand.",
-    type: "web",
-    year: "Sample",
+    slug: "poxyram",
+    name: "Poxyram",
+    description: "Backend platform and API for Poxyram Studio.",
+    type: "API",
+    year: "2025",
     stack: ["TypeScript", "Node.js", "PostgreSQL"],
-    sample: true,
+    href: "https://api.poxyram.com",
     sections: [
-      { title: "The problem", text: "Use this space to explain a real problem you worked on. Who experienced it, what was difficult about the existing approach, and why was it worth solving? This is a sample case study, not a shipped product." },
-      { title: "The approach", text: "Describe the important technical decisions and your role in making them. A clear explanation of one trade-off is more useful than a long list of technologies. Replace the sample stack with the tools you actually used." },
-      { title: "The outcome", text: "Share what changed after the work shipped. Use verifiable results, a specific lesson, or a limitation you would address next. Add a live or source URL to the project data when you have one to share." },
+      {
+        title: "The platform",
+        text: "Poxyram Studio needed a backend that could handle their platform operations end to end. I built the API from the ground up, covering data models, authentication, and the services their frontend depends on.",
+      },
+      {
+        title: "The approach",
+        text: "The backend is structured around clear service boundaries with typed contracts between layers. Every endpoint is documented and tested, and the database schema is versioned so migrations are predictable.",
+      },
+      {
+        title: "The outcome",
+        text: "The API is live and serving the platform. It handles the day-to-day operations of Poxyram Studio and is built to grow as the product does.",
+      },
     ],
   },
   {
-    slug: "release-notes-cli",
-    name: "Release notes CLI",
-    description: "An example entry for a developer tool that turns release preparation into a repeatable workflow.",
-    type: "CLI",
-    year: "Sample",
-    stack: ["Node.js", "TypeScript"],
-    sample: true,
+    slug: "luisardito-shop",
+    name: "Luisardito Shop",
+    description: "Online store for Luisardito.",
+    type: "web",
+    year: "2025",
+    stack: ["Next.js", "React", "TypeScript"],
+    href: "https://luisardito.com",
     sections: [
-      { title: "The starting point", text: "Introduce the repetitive task or developer workflow behind your tool. This sample is here to demonstrate how a smaller project can have a useful case study without invented users or performance numbers." },
-      { title: "Making it useful", text: "Walk through the main interaction, the input the tool expects, and the output it produces. Describe how you handled invalid input or an empty result, and what you intentionally left out of the first version." },
-      { title: "What I learned", text: "Close with something specific you learned while building the project. Replace this sample with your own work before making the site indexable." },
+      {
+        title: "The store",
+        text: "An online store built for Luisardito. The frontend is fast, accessible, and easy to manage, with a checkout flow that stays out of the way.",
+      },
+      {
+        title: "The approach",
+        text: "Built with Next.js and TypeScript. Pages are server-rendered for speed and SEO, with client-side interactivity only where it is needed.",
+      },
+      {
+        title: "The outcome",
+        text: "The store is live and serving customers. It is designed to grow with the catalog without needing a rebuild.",
+      },
     ],
   },
 ];

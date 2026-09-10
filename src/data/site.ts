@@ -8,8 +8,9 @@ export const site = {
   avatar: "/profile/avatar.png",
   email: "",
   github: "https://github.com/NaferJ",
-  instagram: "https://instagram.com/naferj",
-  twitter: "https://twitter.com/naferj",
+  linkedin: "https://www.linkedin.com/in/naferj/",
+  instagram: "https://www.instagram.com/naferjml/",
+  twitter: "https://x.com/NaferJ1",
   coffee: "https://ko-fi.com/naferj",
   currentWork: {
     name: "Poxyram Studio",
@@ -19,7 +20,6 @@ export const site = {
   navigation: [
     { href: "", label: "overview", icon: "home" },
     { href: "experience", label: "experience", icon: "experience" },
-    { href: "projects", label: "projects", icon: "projects" },
     { href: "writing", label: "writing", icon: "writing" },
   ],
 } as const;

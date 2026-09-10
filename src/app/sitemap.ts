@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl, site } from "@/data/site";
 import { getPosts } from "@/data/writing";
-import { projects } from "@/data/projects";
 import { routing } from "@/i18n/routing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     "",
     "experience",
-    "projects",
     "writing",
   ];
   return [
@@ -19,9 +17,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ),
     ...routing.locales.flatMap((locale) =>
       getPosts().filter((post) => !post.sample).map((post) => ({ url: new URL(`/${locale}/writing/${post.slug}`, url).href, lastModified: post.date }))
-    ),
-    ...routing.locales.flatMap((locale) =>
-      projects.filter((project) => !project.sample).map((project) => ({ url: new URL(`/${locale}/projects/${project.slug}`, url).href }))
     ),
   ];
 }

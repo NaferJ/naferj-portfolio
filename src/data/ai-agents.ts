@@ -1,6 +1,6 @@
 export type AgentItem = {
   name: string;
-  href: string;
+  href?: string;
   description: string;
   status: string;
   sample?: boolean;
@@ -8,27 +8,23 @@ export type AgentItem = {
 
 export const agentItems: AgentItem[] = [
   {
-    name: "Agent workflow",
-    href: "https://github.com/NaferJ",
+    name: "Devin as dev agent",
+    href: "https://devin.ai",
     description:
-      "Describe how you use AI agents in your day-to-day work. This is a sample entry showing the pattern: a linked title, a short description, and a status label.",
-    status: "Building",
-    sample: true,
-  },
-  {
-    name: "Code review agent",
-    href: "https://github.com/NaferJ",
-    description:
-      "Another sample entry. Replace this with a real AI tool or agent project.",
+      "Devin Desktop is my IDE, paired with different models depending on the task — GLM-5.2 High, SWE-1.7 Max, GPT-5.6, Claude Sonnet 5.",
     status: "Live",
-    sample: true,
   },
   {
-    name: "CI/CD with agents",
-    href: "https://github.com/NaferJ",
+    name: "Repo rules & agent config",
     description:
-      "A third sample. The status label on the right can be anything: Building, Live, Exploring, or whatever fits the current state of the work.",
-    status: "Exploring",
-    sample: true,
+      "AGENTS.md and templates standardize how agents work across repos — commits, PRs, issues.",
+    status: "Building",
+  },
+  {
+    name: "Automated review gates",
+    href: "https://github.com/NaferJ/luisardito-frontend/pull/16",
+    description:
+      "SonarCloud, GitGuardian, lint, and typecheck gate every PR before merge.",
+    status: "Live",
   },
 ];

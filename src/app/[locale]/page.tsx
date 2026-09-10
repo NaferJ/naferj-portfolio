@@ -19,7 +19,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <Intro />
         <Contributions />
         <AIAgents />
-        <Projects preview locale={locale} />
+        <Projects preview />
         <WritingPreview posts={posts} locale={locale} />
       </div>
     </SiteShell>

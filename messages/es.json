@@ -6,10 +6,10 @@
     "writing": "Escritos"
   },
   "intro": {
-    "title": "Ingeniero, creador y autor",
-    "intro": "Ingeniero backend construyendo sistemas, herramientas y algun proyecto paralelo.",
+    "title": "Ingeniero backend construyendo sistemas, herramientas y algun proyecto paralelo de vez en cuando.",
+    "intro": "Desarrollador full stack que construye de extremo a extremo — desde la base de datos hasta el despliegue, mas algun proyecto paralelo de vez en cuando.",
     "currentWorkPrefix": "Actualmente liderando el desarrollo backend en",
-    "currentWorkDescription": "Ingenieria backend, QA, CI/CD, configuracion de servidores y practicamente todo lo que hay entre medio.",
+    "currentWorkDescription": "construyendo una implementacion de referencia completa del backend para su plataforma.",
     "headlinePrefix": "Construyendo",
     "headlineSuffix": "y dando vida a las ideas"
   },

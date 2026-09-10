@@ -6,10 +6,10 @@
     "writing": "Writing"
   },
   "intro": {
-    "title": "Engineer, creator & author",
-    "intro": "Backend engineer building systems, tools, and the occasional side project.",
+    "title": "Backend engineer building systems, tools, and the occasional side project.",
+    "intro": "Full stack developer who builds end-to-end — from database to deploy, plus the occasional side project.",
     "currentWorkPrefix": "Currently spearheading backend development at",
-    "currentWorkDescription": "Backend engineering, QA, CI/CD, server setup, and pretty much everything in between.",
+    "currentWorkDescription": "building a full backend reference implementation for their platform.",
     "headlinePrefix": "Building",
     "headlineSuffix": "and bring ideas to life"
   },

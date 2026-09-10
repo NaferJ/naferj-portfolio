@@ -16,7 +16,11 @@ export function AIAgents() {
           <li key={item.name} className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-sm font-normal leading-6 text-foreground">
-                <a href={item.href} target="_blank" rel="noopener noreferrer" className="underline decoration-transparent underline-offset-4 transition-[text-decoration-color] hover:decoration-foreground/30">{item.name}</a>
+                {item.href ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="underline decoration-transparent underline-offset-4 transition-[text-decoration-color] hover:decoration-foreground/30">{item.name}</a>
+                ) : (
+                  item.name
+                )}
                 {item.sample ? <span className="sample-badge ml-2">Sample</span> : null}
               </p>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
