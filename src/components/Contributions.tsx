@@ -1,32 +1,30 @@
+import { getTranslations } from "next-intl/server";
 import { getContributions } from "@/lib/github";
 import { TopContributionsPanel } from "@/components/TopContributionsPanel";
 import { HeatmapClient } from "@/components/HeatmapClient";
-
-function formatNumber(value: number): string {
-  return new Intl.NumberFormat("en-US").format(value);
-}
+import { site } from "@/data/site";
 
 export async function Contributions() {
   const data = await getContributions();
-
-  if (!data) {
-    return (
-      <p className="rounded-md border border-white/[0.08] bg-white/[0.02] px-4 py-6 text-sm text-neutral-600">
-        Contribution activity is unavailable right now.
-      </p>
-    );
-  }
+  const t = await getTranslations("contributions");
 
   return (
-    <section>
-      <div className="relative max-w-full overflow-hidden rounded-[28px] bg-black p-4 pb-[76px]">
-        <p className="mb-4 px-1.5 text-base font-medium text-neutral-200">
-          {formatNumber(data.total)} contributions in {data.yearLabel}
-        </p>
-
-        <HeatmapClient weeks={data.weeks} total={data.total} />
-
-        <TopContributionsPanel repositories={data.topRepositories} />
+    <section id="contributions" aria-labelledby="contributions-heading">
+      <div className="rounded-2xl border border-rail bg-[#111111] p-5">
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <h2 id="contributions-heading" className="text-xs font-medium text-neutral-300">{data ? t("contributionsIn", { count: new Intl.NumberFormat("en-US").format(data.total), year: data.yearLabel }) : t("onGitHub")}</h2>
+          <a href={data ? `https://github.com/${data.login}` : site.github} target="_blank" rel="noopener noreferrer" className="text-[11px] text-muted-foreground hover:text-foreground">{t("viewProfile")} <span aria-hidden="true">↗</span></a>
+        </div>
+        {data ? (
+          <>
+            <HeatmapClient weeks={data.weeks} total={data.total} />
+            <div className="mt-3 flex items-center justify-between gap-4 text-[10px] text-muted-foreground">
+              <span>{t("activity", { year: data.year })}</span>
+              <div aria-label="Contribution intensity from less to more" className="flex items-center gap-1.5"><span className="mr-1">{t("less")}</span>{[0.08, 0.3, 0.52, 0.76, 1].map((opacity) => <span key={opacity} aria-hidden="true" className="size-2 rounded-xs bg-highlight" style={{ opacity }} />)}<span className="ml-1">{t("more")}</span></div>
+            </div>
+            {data.topRepositories.length ? <TopContributionsPanel repositories={data.topRepositories} /> : null}
+          </>
+        ) : <p className="text-xs leading-6 text-muted-foreground">{t("fallback")}</p>}
       </div>
     </section>
   );

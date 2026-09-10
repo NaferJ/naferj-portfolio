@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "experience": "Experience",
+    "projects": "Projects",
+    "writing": "Writing"
+  },
+  "intro": {
+    "title": "Engineer, creator & author",
+    "intro": "Backend engineer building systems, tools, and the occasional side project.",
+    "currentWorkPrefix": "Currently spearheading backend development at",
+    "currentWorkDescription": "Backend engineering, QA, CI/CD, server setup, and pretty much everything in between.",
+    "headlinePrefix": "Building",
+    "headlineSuffix": "and bring ideas to life"
+  },
+  "sections": {
+    "projects": "Projects",
+    "projectsDescription": "The most recent things I have built.",
+    "viewAll": "View all",
+    "aiAgents": "AI & Agents",
+    "writing": "Writing"
+  },
+  "projects": {
+    "allProjects": "All projects",
+    "year": "Year",
+    "builtWith": "Built with",
+    "visitProject": "Visit project",
+    "exploreOthers": "Explore the other projects",
+    "sampleNotice": "This is an editable example, not a shipped project. Replace the name, stack, and case study with your own work.",
+    "empty": "New work will appear here soon."
+  },
+  "writing": {
+    "title": "Writing",
+    "description": "Notes on software, building useful things, and learning in public.",
+    "allWriting": "All writing",
+    "empty": "New writing will appear here when it is ready.",
+    "nothingPublished": "Nothing published yet."
+  },
+  "writingRail": {
+    "title": "Writing",
+    "description": "Articles, notes, and things learned along the way.",
+    "recentWriting": "Recent writing",
+    "allWriting": "All writing",
+    "workInProgress": "A work in progress.",
+    "byDesign": "By design.",
+    "empty": "The next note is still taking shape."
+  },
+  "article": {
+    "back": "Back",
+    "published": "Published",
+    "minRead": "min read",
+    "keepReading": "Keep reading",
+    "thanksForReading": "Thanks for reading.",
+    "backToTop": "Back to top",
+    "sampleNotice": "This is sample content for the portfolio template, not a previously published article. Replace it with your own writing before launch."
+  },
+  "experience": {
+    "title": "Experience",
+    "description": "My work so far."
+  },
+  "contributions": {
+    "onGitHub": "On GitHub",
+    "contributionsIn": "{count} contributions in {year}",
+    "viewProfile": "View profile",
+    "activity": "{year} activity",
+    "less": "Less",
+    "more": "More",
+    "topRepositories": "Top repositories",
+    "fallback": "The live activity graph is taking a break. You can still explore my repositories and recent work on GitHub."
+  },
+  "footer": {
+    "writing": "Writing"
+  },
+  "notFound": {
+    "title": "Nothing here. Yet.",
+    "description": "This page may have moved, or the link might not be quite right. There is still plenty to explore.",
+    "backToOverview": "Back to the overview",
+    "readWriting": "Read writing"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "overview": "Inicio",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "writing": "Escritos"
+  },
+  "intro": {
+    "title": "Ingeniero, creador y autor",
+    "intro": "Ingeniero backend construyendo sistemas, herramientas y algun proyecto paralelo.",
+    "currentWorkPrefix": "Actualmente liderando el desarrollo backend en",
+    "currentWorkDescription": "Ingenieria backend, QA, CI/CD, configuracion de servidores y practicamente todo lo que hay entre medio.",
+    "headlinePrefix": "Construyendo",
+    "headlineSuffix": "y dando vida a las ideas"
+  },
+  "sections": {
+    "projects": "Proyectos",
+    "projectsDescription": "Lo mas reciente que he construido.",
+    "viewAll": "Ver todo",
+    "aiAgents": "IA y Agentes",
+    "writing": "Escritos"
+  },
+  "projects": {
+    "allProjects": "Todos los proyectos",
+    "year": "Ano",
+    "builtWith": "Construido con",
+    "visitProject": "Visitar proyecto",
+    "exploreOthers": "Explorar los otros proyectos",
+    "sampleNotice": "Este es un ejemplo editable, no un proyecto publicado. Reemplaza el nombre, el stack y el caso de estudio con tu propio trabajo.",
+    "empty": "Nuevo trabajo aparecera aqui pronto."
+  },
+  "writing": {
+    "title": "Escritos",
+    "description": "Notas sobre software, construir cosas utiles y aprender en publico.",
+    "allWriting": "Todos los escritos",
+    "empty": "Nuevos escritos apareceran aqui cuando esten listos.",
+    "nothingPublished": "Nada publicado todavia."
+  },
+  "writingRail": {
+    "title": "Escritos",
+    "description": "Articulos, notas y cosas aprendidas en el camino.",
+    "recentWriting": "Escritos recientes",
+    "allWriting": "Todos los escritos",
+    "workInProgress": "Un trabajo en progreso.",
+    "byDesign": "Por diseno.",
+    "empty": "La proxima nota todavia esta tomando forma."
+  },
+  "article": {
+    "back": "Atras",
+    "published": "Publicado",
+    "minRead": "min de lectura",
+    "keepReading": "Seguir leyendo",
+    "thanksForReading": "Gracias por leer.",
+    "backToTop": "Volver arriba",
+    "sampleNotice": "Este es contenido de muestra para la plantilla del portafolio, no un articulo previamente publicado. Reemplazalo con tu propia escritura antes del lanzamiento."
+  },
+  "experience": {
+    "title": "Experiencia",
+    "description": "Mi trabajo hasta ahora."
+  },
+  "contributions": {
+    "onGitHub": "En GitHub",
+    "contributionsIn": "{count} contribuciones en {year}",
+    "viewProfile": "Ver perfil",
+    "activity": "Actividad de {year}",
+    "less": "Menos",
+    "more": "Mas",
+    "topRepositories": "Repositorios principales",
+    "fallback": "El grafico de actividad en vivo esta en pausa. Todavia puedes explorar mis repositorios y trabajo reciente en GitHub."
+  },
+  "footer": {
+    "writing": "Escritos"
+  },
+  "notFound": {
+    "title": "Nada aqui. Todavia.",
+    "description": "Esta pagina puede haberse movido o el enlace podria no ser correcto. Todavia hay mucho por explorar.",
+    "backToOverview": "Volver al inicio",
+    "readWriting": "Leer escritos"
+  }
+}

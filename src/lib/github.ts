@@ -161,6 +161,7 @@ async function fetchPublicContributionCalendar(
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
     },
     next: { revalidate: REVALIDATE_SECONDS },
+    signal: AbortSignal.timeout(8000),
   });
 
   if (!response.ok) return null;
@@ -215,6 +216,7 @@ async function fetchTopRepositories(
       },
     }),
     next: { revalidate: REVALIDATE_SECONDS },
+    signal: AbortSignal.timeout(8000),
   });
 
   if (!response.ok) return null;
@@ -274,15 +276,14 @@ async function fetchTopRepositories(
 }
 
 export async function getContributions(): Promise<ContributionSummary | null> {
-  const calendar = await fetchPublicContributionCalendar(GITHUB_USERNAME);
+  const calendar = await fetchPublicContributionCalendar(GITHUB_USERNAME).catch(() => null);
   if (!calendar) return null;
 
-  const topRepositories = await fetchTopRepositories(
+  const topRepositories = (await fetchTopRepositories(
     GITHUB_USERNAME,
     calendar.from,
     calendar.to,
-  );
-  if (!topRepositories) return null;
+  ).catch(() => null)) ?? [];
 
   const firstDay = new Date(`${calendar.from}T00:00:00.000Z`);
   const firstWeekday = firstDay.getUTCDay();
@@ -299,7 +300,8 @@ export async function getContributions(): Promise<ContributionSummary | null> {
     (firstShownSunday.getTime() - firstSunday.getTime()) / DAY_MS,
   );
   const startWeekIndex = Math.floor(startOffsetDays / 7);
-  const endDate = new Date(`${calendar.to}T00:00:00.000Z`);
+  const endDate = new Date();
+  endDate.setUTCHours(23, 59, 59, 999);
 
   const weeks: ContributionWeek[] = [];
   for (let weekIndex = startWeekIndex; weekIndex < 53; weekIndex++) {

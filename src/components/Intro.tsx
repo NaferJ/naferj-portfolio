@@ -1,35 +1,30 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { RotatingWord } from "@/components/RotatingWord";
-
-const paragraphStyles = "text-[15px] leading-7 text-neutral-400";
+import { site } from "@/data/site";
 
 export function Intro() {
+  const t = useTranslations("intro");
+
   return (
-    <header className="space-y-4">
-      <h1 className="text-pretty text-xl font-normal leading-7 tracking-[-0.015em] text-neutral-100">
-        <strong className="font-semibold">NaferJ</strong> builds <RotatingWord /> and
-        ships products.
+    <header>
+      <div className="mb-8 flex items-center gap-4">
+        <Image src={site.avatar} alt={`${site.name} portrait`} width={64} height={64} priority className="size-16 rounded-full border border-border object-cover grayscale" />
+        <div>
+          <p className="text-sm font-medium text-foreground">{site.name}</p>
+          <p className="mt-1 text-xs text-muted-foreground">{t("title")}</p>
+        </div>
+      </div>
+      <h1 className="max-w-xl text-pretty text-[28px] leading-[1.45] font-medium tracking-[-0.04em] text-foreground sm:text-[34px]">
+        {t("headlinePrefix")} <RotatingWord /><br className="hidden sm:block" /> {t("headlineSuffix")}<span className="text-highlight">.</span>
       </h1>
-      <p className={paragraphStyles}>
-        Orchestrator, engineer, technical lead, creator and author. Currently
-        spearheading backend development at{" "}
-        <a
-          className="group inline-flex items-center gap-1.5 rounded-[4px] bg-white/[0.06] px-1.5 py-px text-sm font-medium text-neutral-100 transition-colors hover:bg-white/[0.1]"
-          href="https://www.instagram.com/poxyram/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden="true"
-            src="/brands/instagram.png"
-            alt=""
-            width={14}
-            height={14}
-          />
-          <span>Poxyram Studio</span>
-        </a>{" "}
-        — backend engineering, QA, CI/CD, server setup, and pretty much everything
-        in between.
+      <p className="mt-6 text-[15px] leading-7 text-neutral-400">{t("intro")}</p>
+      <p className="mt-3 text-[15px] leading-7 text-neutral-400">
+        {t("currentWorkPrefix")}{" "}
+        <a className="inline-flex items-center gap-1.5 rounded-md bg-muted px-1.5 py-px text-sm font-medium text-foreground hover:bg-accent" href={site.currentWork.href} target="_blank" rel="noopener noreferrer">
+          <Image aria-hidden="true" src={site.currentWork.image} alt="" width={14} height={14} />
+          {site.currentWork.name}
+        </a>.<br className="hidden sm:block" /> {t("currentWorkDescription")}
       </p>
     </header>
   );

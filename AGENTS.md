@@ -80,3 +80,18 @@ When creating an issue:
 5. Set Status to Todo, then move it to In Progress when coding begins.
 
 Do not create separate project cards for pull requests. The issue card is the source of truth and the PR should link it with `Closes #NN`.
+
+## Content and launch settings
+
+- `src/data/site.ts` holds identity, biography, contact links, navigation, and the production URL. Set `url` and set `indexable` to `true` only after personalizing the template. Without a URL, social-image metadata uses localhost for local development.
+- `src/data/projects.ts` holds project rows and case studies. `sample: true` labels an example and excludes its detail page from indexing.
+- `src/data/experience.ts` holds work history and local logo paths.
+- `src/data/writing.ts` holds typed posts and external publications. `draft: true` excludes a post from listings and direct routes; `sample: true` visibly labels template content. Article headings require unique URL-safe IDs.
+- Writing is local; no CMS or additional publishing credentials are required.
+- GitHub configuration in `.env.example` is optional. The public graph can render without a token; repository details use the server-side token. Upstream failures must not crash the portfolio.
+
+## Additional verification
+
+- With Node.js 22.18+ or 24, run `node --experimental-strip-types --test tests/content.test.mjs tests/github.test.mjs` for content contracts and mocked GitHub regression tests. The tests make no live GitHub requests.
+- `tests/browser-smoke.mjs` exercises a running production server through a dedicated Chromium/Edge debugging session. Run `node --experimental-strip-types tests/browser-smoke.mjs http://localhost:3100 http://127.0.0.1:9223` after starting that server and a separate headless browser with remote debugging on port 9223. Do not attach it to a personal browsing session. Screenshots go to a temporary directory.
+- Browser checks cover routes, links, 404s, search/filter/reset, keyboard access, metadata, and widths of 320, 375, 768, 1024, and 1440 pixels.
