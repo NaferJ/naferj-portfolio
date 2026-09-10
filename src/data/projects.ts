@@ -80,6 +80,21 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    slug: "redlink-agency",
+    name: "Redlink Agency",
+    description: "Website for Redlink Agency.",
+    type: "web",
+    year: "2025",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    href: "https://redlinkagency.com",
+    sections: [
+      {
+        title: "The site",
+        text: "A website for Redlink Agency built to present their services and work.",
+      },
+    ],
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {

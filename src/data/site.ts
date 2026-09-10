@@ -20,6 +20,7 @@ export const site = {
   navigation: [
     { href: "", label: "overview", icon: "home" },
     { href: "experience", label: "experience", icon: "experience" },
+    { href: "projects", label: "projects", icon: "projects" },
     { href: "writing", label: "writing", icon: "writing" },
   ],
 } as const;

@@ -1,7 +1,10 @@
+"use client";
+
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { projects } from "@/data/projects";
 
-export function Projects({ preview = false }: { preview?: boolean }) {
+export function Projects({ locale, preview = false }: { locale?: string; preview?: boolean }) {
   const t = useTranslations("sections");
   const tProjects = useTranslations("projects");
   const Heading = preview ? "h2" : "h1";
@@ -10,6 +13,9 @@ export function Projects({ preview = false }: { preview?: boolean }) {
     <section id="projects" aria-labelledby="projects-heading">
       <div className="flex items-center justify-between gap-4">
         <Heading id="projects-heading" className={preview ? "section-title" : "page-title"}>{t("projects")}</Heading>
+        {preview ? (
+          <Link href={`/${locale}/projects`} className="text-xs text-muted-foreground hover:text-foreground">{t("viewAll")} <span aria-hidden="true">→</span></Link>
+        ) : null}
       </div>
       <p className="mt-3 text-sm leading-7 text-neutral-400">{t("projectsDescription")}</p>
       <ul className="-mx-3 mt-8 flex flex-col gap-1" aria-label="Projects">
