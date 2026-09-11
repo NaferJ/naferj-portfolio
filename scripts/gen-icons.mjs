@@ -6,7 +6,6 @@ const jobs = [
   [avatar, "src/app/apple-icon.png", 180],
   [avatar, "public/icons/icon-192.png", 192],
   [avatar, "public/icons/icon-512.png", 512],
-  [avatar, "/tmp/favicon-src.png", 256],
 ];
 
 fs.mkdirSync("public/icons", { recursive: true });
@@ -14,7 +13,7 @@ for (const [src, dest, size] of jobs) {
   await sharp(src).resize(size, size, { fit: "cover" }).png().toFile(dest);
   console.log("wrote", dest);
 }
-const png = fs.readFileSync("/tmp/favicon-src.png");
+const png = await sharp(avatar).resize(256, 256, { fit: "cover" }).png().toBuffer();
 const header = Buffer.alloc(6);
 header.writeUInt16LE(0, 0);
 header.writeUInt16LE(1, 2);
