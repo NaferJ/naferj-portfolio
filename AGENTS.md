@@ -20,6 +20,8 @@ Do not invent issue or PR formats. The assistant never commits, pushes, rewrites
 
 ## Commands
 
+All Node.js commands should be run from WSL (Ubuntu) to avoid Windows/Linux lock file issues.
+
 - `npm ci` — install exactly from `package-lock.json`
 - `npm run dev` — start the development server
 - `npm run lint` — run ESLint
@@ -27,18 +29,27 @@ Do not invent issue or PR formats. The assistant never commits, pushes, rewrites
 - `npm run build` — create the production build
 - `npm run start` — serve the production build
 
-### Windows / cross-platform lock file note
+### WSL workflow (required for this project)
 
-CI runs on `ubuntu-latest`. Some dependencies (e.g. `@img/sharp`, native WASM bindings) have platform-specific optional dependencies. **`npm install` on Windows silently drops the Linux-only optional dependency entries from `package-lock.json`**, which then breaks `npm ci` in CI with `Missing: ... from lock file` errors.
+CI runs on `ubuntu-latest`. `npm install` on Windows silently drops Linux-only optional dependencies from `package-lock.json`, which breaks `npm ci` in CI. To avoid this, all npm commands must run from WSL:
 
-Rules to avoid this:
-1. **Never run plain `npm install` on Windows** after the lock file is correct — it rewrites the lock and strips Linux entries. Use `npm ci` for routine local installs instead; it only reads the lock, never rewrites it.
-2. **When adding/updating a dependency**, regenerate the lock file in a Linux container so both platforms' optional deps are recorded:
-   ```powershell
-   docker run --rm -v "${PWD}:/app" -w /app node:22 sh -c "npm install --no-audit --no-fund"
-   ```
-   Then run `npm ci` locally (Windows) to install from the corrected lock without touching it again.
-3. Verify before pushing: `docker run --rm -v "${PWD}:/app" -w /app node:22 sh -c "rm -rf node_modules && npm ci --ignore-scripts"` should succeed with no errors — this exactly mirrors CI.
+```bash
+# Open WSL and navigate to the project
+wsl -d Ubuntu
+cd /mnt/c/Users/NaferJ/Projects/Private/naferj-portfolio
+
+# Node 22 is managed via nvm in WSL
+source ~/.nvm/nvm.sh
+nvm use 22
+
+# Now run any npm command — the lock file will always be correct
+npm ci
+npm install <package>   # safe in WSL — lock file includes Linux deps
+npm run dev
+npm run build
+```
+
+Never run `npm install` from PowerShell/cmd — it will corrupt the lock file.
 
 ## Code conventions
 
