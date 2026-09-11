@@ -64,16 +64,16 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
         fontFamily: "Inter",
       }}
     >
-      <div style={{ display: "flex", height: 96, borderBottom: `1px solid ${rail}` }}>
+      <div style={{ display: "flex", height: 120, borderBottom: `1px solid ${rail}` }}>
         <div style={{ display: "flex", flex: 1 }} />
         <div style={{ display: "flex", width: 300, borderLeft: `1px solid ${rail}` }} />
       </div>
       <div style={{ display: "flex", alignItems: "stretch", flex: 1 }}>
         <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center", padding: "0 56px" }}>
-          <div style={{ display: "flex", fontSize: 100, fontWeight: 700, letterSpacing: -4, lineHeight: 1 }}>
+          <div style={{ display: "flex", fontSize: 80, fontWeight: 700, letterSpacing: -4, lineHeight: 1 }}>
             {site.name}
           </div>
-          <div style={{ display: "flex", flexDirection: "column", fontSize: 32, lineHeight: 1.5, marginTop: 24 }}>
+          <div style={{ display: "flex", flexDirection: "column", fontSize: 26, lineHeight: 1.5, marginTop: 20 }}>
             <div style={{ display: "flex", fontWeight: 500, color: "#ededed" }}>{`${lead}.`}</div>
             {body.length > 0 && <div style={{ display: "flex", color: "#9b9b9b", marginTop: 4 }}>{body}</div>}
           </div>
@@ -82,7 +82,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
           <img src={avatarSrc} alt="" width={140} height={140} style={{ borderRadius: 24, boxShadow: "0 0 60px 8px rgba(255,255,255,0.08)" }} />
         </div>
       </div>
-      <div style={{ display: "flex", alignItems: "stretch", height: 120, borderTop: `1px solid ${rail}` }}>
+      <div style={{ display: "flex", alignItems: "stretch", height: 160, borderTop: `1px solid ${rail}` }}>
         {stats.map((stat) => (
           <div
             key={stat.label}
@@ -96,7 +96,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
             }}
           >
             <div style={{ display: "flex", fontSize: 15, fontWeight: 500, letterSpacing: 2, color: muted }}>{stat.label.toUpperCase()}</div>
-            <div style={{ display: "flex", fontSize: 40, fontWeight: 600, marginTop: 8 }}>{stat.value}</div>
+            <div style={{ display: "flex", fontSize: 42, fontWeight: 600, marginTop: 10 }}>{stat.value}</div>
           </div>
         ))}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 300, borderLeft: `1px solid ${rail}` }}>

@@ -7,9 +7,9 @@
   --muted: #171717;
   --accent: #262626;
   --border: rgb(255 255 255 / 12%);
-  --ring: #6b8afd;
+  --ring: #ededed;
   --muted-foreground: #929292;
-  --highlight: #6b8afd;
+  --highlight: #ededed;
 }
 
 @theme inline {
