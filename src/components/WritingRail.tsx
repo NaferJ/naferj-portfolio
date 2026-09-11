@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { Icon } from "@/components/Icon";
 import { getPosts, readingMinutes } from "@/data/writing";
 
-export function WritingRail({ locale }: { locale: string }) {
+export function WritingRail({ locale }: Readonly<{ locale: string }>) {
   const t = useTranslations("writingRail");
   const tArticle = useTranslations("article");
   const posts = getPosts(locale).slice(0, 4);

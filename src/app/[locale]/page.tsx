@@ -27,7 +27,7 @@ function ContributionsSkeleton() {
   );
 }
 
-export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+export default async function Home({ params }: Readonly<{ params: Promise<{ locale: string }> }>) {
   const { locale } = await params;
   setRequestLocale(locale);
   const posts = getPosts(locale).slice(0, 2);
@@ -47,7 +47,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   );
 }
 
-function WritingPreview({ posts, locale }: { posts: ReturnType<typeof getPosts>; locale: string }) {
+function WritingPreview({ posts, locale }: Readonly<{ posts: ReturnType<typeof getPosts>; locale: string }>) {
   const t = useTranslations("sections");
   const tWriting = useTranslations("writing");
   return (

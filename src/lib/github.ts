@@ -134,14 +134,14 @@ const DAY_MS = 86_400_000;
 
 // Matches a contribution graph cell and the adjacent tooltip.
 // Example:
-// <td ... data-ix="0" ... data-date="2025-09-07" ...></td>
+// <td ... data-date="2025-09-07" ...></td>
 // <tool-tip ...>No contributions on September 7th.</tool-tip>
 //
 // Or with a count:
 // <tool-tip ...>15 contributions on September 14th.</tool-tip>
 // "1 contribution" (singular) is also supported.
 const CELL_REGEX =
-  /<td\b(?=[^>]*data-ix="(\d+)")(?=[^>]*data-date="([^"]+)")[^>]*>[\s\S]*?<\/td>\s*<tool-tip[^>]*>(?:No contributions|(\d+) contributions?) on[^<]*<\/tool-tip>/g;
+  /<td\b[^>]*data-date="([^"]+)"[^>]*>[\s\S]*?<\/td>\s*<tool-tip[^>]*>(?:No contributions|(\d+) contributions?) on[^<]*<\/tool-tip>/g;
 
 const RANGE_REGEX =
   /data-from="(\d{4}-\d{2}-\d{2}) \d{2}:\d{2}:\d{2} UTC"\s+data-to="(\d{4}-\d{2}-\d{2}) \d{2}:\d{2}:\d{2} UTC"/;
@@ -168,7 +168,7 @@ async function fetchPublicContributionCalendar(
 
   const html = await response.text();
 
-  const rangeMatch = html.match(RANGE_REGEX);
+  const rangeMatch = RANGE_REGEX.exec(html);
   if (!rangeMatch) return null;
 
   const from = rangeMatch[1];
@@ -176,17 +176,14 @@ async function fetchPublicContributionCalendar(
 
   const dailyCounts = new Map<string, number>();
   let total = 0;
-  let maxWeekIndex = 0;
 
   let match: RegExpExecArray | null;
   while ((match = CELL_REGEX.exec(html)) !== null) {
-    const weekIndex = Number.parseInt(match[1], 10);
-    const date = match[2];
-    const count = match[3] ? Number.parseInt(match[3], 10) : 0;
+    const date = match[1];
+    const count = match[2] ? Number.parseInt(match[2], 10) : 0;
 
     dailyCounts.set(date, count);
     total += count;
-    maxWeekIndex = Math.max(maxWeekIndex, weekIndex);
   }
 
   if (dailyCounts.size === 0) return null;

@@ -10,7 +10,7 @@ function describe(day: ContributionDay): string {
   return `${day.count} contribution${day.count === 1 ? "" : "s"} on ${date}`;
 }
 
-export function HeatmapClient({ weeks, total }: { weeks: ContributionSummary["weeks"]; total: number }) {
+export function HeatmapClient({ weeks, total }: Readonly<{ weeks: ContributionSummary["weeks"]; total: number }>) {
   const days = weeks.flatMap((week) => week.days);
   const [activeDate, setActiveDate] = useState(days.at(-1)?.date);
   const [selected, setSelected] = useState<ContributionDay | null>(null);
@@ -31,7 +31,7 @@ export function HeatmapClient({ weeks, total }: { weeks: ContributionSummary["we
   }
 
   return (
-    <div role="group" aria-label={`Contribution activity; ${total} contributions in the last year`}>
+    <section aria-label={`Contribution activity; ${total} contributions in the last year`}>
       <p id="heatmap-instructions" className="sr-only">Use arrow keys to explore daily activity. Home and End jump to the first and last day.</p>
       <div ref={scroller} className="overflow-x-auto py-1" onMouseLeave={() => setSelected(null)}>
         <div className="flex min-w-max w-full gap-[3px]">
@@ -45,6 +45,6 @@ export function HeatmapClient({ weeks, total }: { weeks: ContributionSummary["we
         </div>
       </div>
       <p aria-hidden="true" className="mt-2 min-h-4 text-[10px] text-muted-foreground">{selected ? describe(selected) : "Hover, tap, or use the arrow keys to explore."}</p>
-    </div>
+    </section>
   );
 }

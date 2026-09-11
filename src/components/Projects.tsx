@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { getProjects } from "@/data/projects";
 
-export function Projects({ locale, preview = false }: { locale?: string; preview?: boolean }) {
+export function Projects({ locale, preview = false }: Readonly<{ locale?: string; preview?: boolean }>) {
   const t = useTranslations("sections");
   const tProjects = useTranslations("projects");
   const projects = getProjects(locale);

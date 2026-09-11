@@ -48,11 +48,11 @@ export function Icon({
   name,
   className = "size-4",
   brand = false,
-}: {
+}: Readonly<{
   name: StrokeName | FillName;
   className?: string;
   brand?: boolean;
-}) {
+}>) {
   const gradientId = useId().replace(/:/g, "-");
   if (name in filledPaths) {
     const fillName = name as FillName;
@@ -62,7 +62,7 @@ export function Icon({
           <defs>
             <linearGradient id={`ig-${gradientId}`} x1="0%" y1="100%" x2="100%" y2="0%">
               {gradientStops.instagram.map((color, i) => (
-                <stop key={i} offset={`${(i / (gradientStops.instagram.length - 1)) * 100}%`} stopColor={color} />
+                <stop key={color} offset={`${(i / (gradientStops.instagram.length - 1)) * 100}%`} stopColor={color} />
               ))}
             </linearGradient>
           </defs>

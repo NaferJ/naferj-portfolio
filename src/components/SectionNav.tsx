@@ -20,7 +20,7 @@ const socialLinks: SocialLink[] = [
   { name: "coffee", href: site.coffee, label: `Support ${site.name} (opens in a new tab)` },
 ];
 
-export function SectionNav({ locale }: { locale: string }) {
+export function SectionNav({ locale }: Readonly<{ locale: string }>) {
   const pathname = usePathname();
   const t = useTranslations("nav");
   const otherLocale = locale === "en" ? "es" : "en";

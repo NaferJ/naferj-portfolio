@@ -27,6 +27,9 @@
 html {
   min-height: 100%;
   background: var(--background);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scrollbar-color: #404040 var(--background);
 }
 
 body {
@@ -171,12 +174,6 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-html {
-  color-scheme: dark;
-  scroll-behavior: smooth;
-  scrollbar-color: #404040 var(--background);
 }
 
 :where(a, button, input, summary):focus-visible {

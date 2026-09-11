@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { Icon } from "@/components/Icon";
 import type { TopRepository } from "@/lib/github";
 
-export function TopContributionsPanel({ repositories }: { repositories: TopRepository[] }) {
+export function TopContributionsPanel({ repositories }: Readonly<{ repositories: TopRepository[] }>) {
   const [open, setOpen] = useState(false);
   const [height, setHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);

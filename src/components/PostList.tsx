@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { type Post } from "@/data/writing";
 
-export function PostList({ posts, locale = "en" }: { posts: Post[]; locale?: string }) {
+export function PostList({ posts, locale = "en" }: Readonly<{ posts: Post[]; locale?: string }>) {
   return (
     <div className="flex flex-col gap-5">
       {posts.map((post) => (

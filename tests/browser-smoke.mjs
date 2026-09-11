@@ -8,6 +8,26 @@ import { site } from "../src/data/site.ts";
 
 const origin = process.argv[2] ?? "http://localhost:3100";
 const debuggerUrl = process.argv[3] ?? "http://127.0.0.1:9223";
+
+function assertLocalHttpUrl(value, label) {
+  let parsed;
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw new Error(`${label} is not a valid URL: ${value}`);
+  }
+  if (!["http:", "https:"].includes(parsed.protocol)) {
+    throw new Error(`${label} must use http or https: ${value}`);
+  }
+  const allowedHosts = ["localhost", "127.0.0.1", "::1"];
+  if (!allowedHosts.includes(parsed.hostname)) {
+    throw new Error(`${label} must point to a local address: ${value}`);
+  }
+}
+
+assertLocalHttpUrl(origin, "origin");
+assertLocalHttpUrl(debuggerUrl, "debuggerUrl");
+
 const screenshots = await mkdtemp(join(tmpdir(), "portfolio-browser-"));
 const targets = await fetch(`${debuggerUrl}/json/list`).then((response) => response.json());
 const target = targets.find((target) => target.type === "page");

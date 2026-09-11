@@ -7,7 +7,7 @@ import { getPost, getPosts, formatDate, readingMinutes } from "@/data/writing";
 import { getSiteUrl, site } from "@/data/site";
 import { routing } from "@/i18n/routing";
 
-type Props = { params: Promise<{ locale: string; slug: string }> };
+type Props = Readonly<{ params: Promise<{ locale: string; slug: string }> }>;
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -47,13 +47,14 @@ export default async function WritingPostPage({ params }: Props) {
         <p className="mt-4 text-sm text-muted-foreground">{formatDate(post.date, locale)} &middot; {readingMinutes(post)} {t("minRead")}{post.sample ? " \u00b7 Sample" : ""}</p>
         {post.sample ? <p className="mt-5 rounded-lg border border-rail bg-muted/40 px-4 py-3 text-xs leading-6 text-muted-foreground">{t("sampleNotice")}</p> : null}
         <div className="article-body mt-8">
-          {post.body.map((block, index) => {
+          {post.body.map((block) => {
+            const key = block.type === "heading" ? block.id : block.type === "list" ? block.items.join("") : block.text;
             switch (block.type) {
-              case "paragraph": return <p key={index}>{block.text}</p>;
-              case "heading": return <h2 key={index} id={block.id}>{block.text}</h2>;
-              case "quote": return <blockquote key={index}>{block.text}</blockquote>;
-              case "list": return <ul key={index}>{block.items.map((item, i) => <li key={i}>{item}</li>)}</ul>;
-              case "code": return <figure key={index}><figcaption className="mb-2 text-[10px] text-muted-foreground">{block.language}</figcaption><pre><code>{block.text}</code></pre></figure>;
+              case "paragraph": return <p key={key}>{block.text}</p>;
+              case "heading": return <h2 key={key} id={block.id}>{block.text}</h2>;
+              case "quote": return <blockquote key={key}>{block.text}</blockquote>;
+              case "list": return <ul key={key}>{block.items.map((item) => <li key={item}>{item}</li>)}</ul>;
+              case "code": return <figure key={key}><figcaption className="mb-2 text-[10px] text-muted-foreground">{block.language}</figcaption><pre><code>{block.text}</code></pre></figure>;
               default: return null;
             }
           })}

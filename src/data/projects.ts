@@ -10,15 +10,32 @@ export type Project = {
   sections: { title: string; text: string }[];
 };
 
-export const projectsEn: Project[] = [
-  {
-    slug: "personal-portfolio",
+type ProjectShared = {
+  slug: string;
+  type: string;
+  year: string;
+  stack: string[];
+  href?: string;
+  sample?: boolean;
+};
+
+type ProjectLocalized = {
+  name: string;
+  description: string;
+  sections: { title: string; text: string }[];
+};
+
+const sharedProjects: ProjectShared[] = [
+  { slug: "personal-portfolio", type: "web", year: "2026", stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"], href: "https://naferj.com" },
+  { slug: "poxyram", type: "API", year: "2025", stack: ["TypeScript", "Node.js", "PostgreSQL"], href: "https://api.poxyram.com" },
+  { slug: "luisardito-shop", type: "web", year: "2025", stack: ["Next.js", "React", "TypeScript"], href: "https://luisardito.com" },
+  { slug: "redlink-agency", type: "web", year: "2025", stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"], href: "https://redlinkagency.com" },
+];
+
+const enCopy: Record<string, ProjectLocalized> = {
+  "personal-portfolio": {
     name: "Personal portfolio",
     description: "A home for my work, writing, and the things I learn along the way.",
-    type: "web",
-    year: "2026",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    href: "https://naferj.com",
     sections: [
       {
         title: "A place for the work",
@@ -34,14 +51,9 @@ export const projectsEn: Project[] = [
       },
     ],
   },
-  {
-    slug: "poxyram",
+  poxyram: {
     name: "Poxyram",
     description: "Backend platform and API for Poxyram Studio.",
-    type: "API",
-    year: "2025",
-    stack: ["TypeScript", "Node.js", "PostgreSQL"],
-    href: "https://api.poxyram.com",
     sections: [
       {
         title: "The platform",
@@ -57,14 +69,9 @@ export const projectsEn: Project[] = [
       },
     ],
   },
-  {
-    slug: "luisardito-shop",
+  "luisardito-shop": {
     name: "Luisardito Shop",
     description: "Online store for Luisardito.",
-    type: "web",
-    year: "2025",
-    stack: ["Next.js", "React", "TypeScript"],
-    href: "https://luisardito.com",
     sections: [
       {
         title: "The store",
@@ -80,14 +87,9 @@ export const projectsEn: Project[] = [
       },
     ],
   },
-  {
-    slug: "redlink-agency",
+  "redlink-agency": {
     name: "Redlink Agency",
     description: "Website for Redlink Agency.",
-    type: "web",
-    year: "2025",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    href: "https://redlinkagency.com",
     sections: [
       {
         title: "The site",
@@ -95,17 +97,12 @@ export const projectsEn: Project[] = [
       },
     ],
   },
-];
+};
 
-export const projectsEs: Project[] = [
-  {
-    slug: "personal-portfolio",
+const esCopy: Record<string, ProjectLocalized> = {
+  "personal-portfolio": {
     name: "Portafolio personal",
     description: "Un espacio para mi trabajo, escritos y lo que voy aprendiendo en el camino.",
-    type: "web",
-    year: "2026",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    href: "https://naferj.com",
     sections: [
       {
         title: "Un lugar para el trabajo",
@@ -121,14 +118,9 @@ export const projectsEs: Project[] = [
       },
     ],
   },
-  {
-    slug: "poxyram",
+  poxyram: {
     name: "Poxyram",
     description: "Plataforma backend y API para Poxyram Studio.",
-    type: "API",
-    year: "2025",
-    stack: ["TypeScript", "Node.js", "PostgreSQL"],
-    href: "https://api.poxyram.com",
     sections: [
       {
         title: "La plataforma",
@@ -144,14 +136,9 @@ export const projectsEs: Project[] = [
       },
     ],
   },
-  {
-    slug: "luisardito-shop",
+  "luisardito-shop": {
     name: "Luisardito Shop",
     description: "Tienda en línea para Luisardito.",
-    type: "web",
-    year: "2025",
-    stack: ["Next.js", "React", "TypeScript"],
-    href: "https://luisardito.com",
     sections: [
       {
         title: "La tienda",
@@ -167,14 +154,9 @@ export const projectsEs: Project[] = [
       },
     ],
   },
-  {
-    slug: "redlink-agency",
+  "redlink-agency": {
     name: "Redlink Agency",
     description: "Sitio web para Redlink Agency.",
-    type: "web",
-    year: "2025",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    href: "https://redlinkagency.com",
     sections: [
       {
         title: "El sitio",
@@ -182,7 +164,14 @@ export const projectsEs: Project[] = [
       },
     ],
   },
-];
+};
+
+function buildProjects(shared: ProjectShared[], copy: Record<string, ProjectLocalized>): Project[] {
+  return shared.map((project) => ({ ...project, ...copy[project.slug] }));
+}
+
+export const projectsEn: Project[] = buildProjects(sharedProjects, enCopy);
+export const projectsEs: Project[] = buildProjects(sharedProjects, esCopy);
 
 export const projects = projectsEn;
 

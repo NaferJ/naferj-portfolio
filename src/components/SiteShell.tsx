@@ -4,7 +4,7 @@ import { SectionNav } from "@/components/SectionNav";
 import { WritingRail } from "@/components/WritingRail";
 import { site } from "@/data/site";
 
-export function SiteShell({ children, locale }: { children: React.ReactNode; locale: string }) {
+export function SiteShell({ children, locale }: Readonly<{ children: React.ReactNode; locale: string }>) {
   const t = useTranslations("footer");
   const year = new Date().getFullYear();
   return (

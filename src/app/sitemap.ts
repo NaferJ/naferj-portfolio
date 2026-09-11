@@ -14,7 +14,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   return [
     ...routing.locales.flatMap((locale) =>
-      pages.map((page) => ({ url: new URL(`/${locale}${page ? `/${page}` : ""}`, url).href }))
+      pages.map((page) => {
+        const path = page ? "/" + page : "";
+        return { url: new URL("/" + locale + path, url).href };
+      })
     ),
     ...routing.locales.flatMap((locale) =>
       getPosts(locale).filter((post) => !post.sample).map((post) => ({ url: new URL(`/${locale}/writing/${post.slug}`, url).href, lastModified: post.date }))
