@@ -20,7 +20,7 @@ Do not invent issue or PR formats. The assistant never commits, pushes, rewrites
 
 ## Commands
 
-All Node.js commands should be run from WSL (Ubuntu) to avoid Windows/Linux lock file issues.
+All Node.js commands run natively on Windows (Node 22+ required).
 
 - `npm ci` — install exactly from `package-lock.json`
 - `npm run dev` — start the development server
@@ -29,27 +29,9 @@ All Node.js commands should be run from WSL (Ubuntu) to avoid Windows/Linux lock
 - `npm run build` — create the production build
 - `npm run start` — serve the production build
 
-### WSL workflow (required for this project)
+## Cross-platform lock file
 
-CI runs on `ubuntu-latest`. `npm install` on Windows silently drops Linux-only optional dependencies from `package-lock.json`, which breaks `npm ci` in CI. To avoid this, all npm commands must run from WSL:
-
-```bash
-# Open WSL and navigate to the project
-wsl -d Ubuntu
-cd /mnt/c/Users/NaferJ/Projects/Private/naferj-portfolio
-
-# Node 22 is managed via nvm in WSL
-source ~/.nvm/nvm.sh
-nvm use 22
-
-# Now run any npm command — the lock file will always be correct
-npm ci
-npm install <package>   # safe in WSL — lock file includes Linux deps
-npm run dev
-npm run build
-```
-
-Never run `npm install` from PowerShell/cmd — it will corrupt the lock file.
+CI runs on `ubuntu-latest`. To keep `package-lock.json` compatible with both Windows and Linux CI, use `npm ci` for installs and avoid switching between Windows and WSL for npm commands. If the lock file gets corrupted, delete `node_modules` and `package-lock.json`, then run `npm install` once to regenerate.
 
 ## Code conventions
 
