@@ -3,6 +3,8 @@ import test from "node:test";
 import { site, getSiteUrl } from "../src/data/site.ts";
 import { projects, getProject } from "../src/data/projects.ts";
 import { postsEn, publications, getPosts, getPost, readingMinutes, formatDate } from "../src/data/writing.ts";
+import enMessages from "../messages/en.json" with { type: "json" };
+import esMessages from "../messages/es.json" with { type: "json" };
 
 function assertUnique(values) {
   assert.equal(new Set(values).size, values.length);
@@ -28,12 +30,22 @@ test("projects have unique routable slugs and complete case studies", () => {
   for (const project of projects) {
     assert.match(project.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
     assert.equal(getProject(project.slug), project);
-    assert.ok(project.sections.length);
     assert.ok(project.stack.length);
-    assert.ok(project.sections.every((section) => section.title && section.text));
     if (project.href) assertUrl(project.href);
   }
   assert.equal(getProject("does-not-exist"), undefined);
+  for (const locale of ["en", "es"]) {
+    const messages = locale === "en" ? enMessages : esMessages;
+    const copy = messages.projectCopy;
+    for (const project of projects) {
+      const entry = copy[project.slug];
+      assert.ok(entry, `project ${project.slug} has copy in ${locale}`);
+      assert.ok(entry.name, `project ${project.slug} has name in ${locale}`);
+      assert.ok(entry.description, `project ${project.slug} has description in ${locale}`);
+      assert.ok(entry.sections.length, `project ${project.slug} has sections in ${locale}`);
+      assert.ok(entry.sections.every((section) => section.title && section.text), `project ${project.slug} sections have title and text in ${locale}`);
+    }
+  }
 });
 
 test("writing has unique slugs, heading anchors, valid dates, and reading times", () => {

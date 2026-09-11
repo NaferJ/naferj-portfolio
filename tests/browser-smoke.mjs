@@ -28,20 +28,25 @@ function assertLocalHttpUrl(value, label) {
 assertLocalHttpUrl(origin, "origin");
 assertLocalHttpUrl(debuggerUrl, "debuggerUrl");
 
-function safeUrl(input) {
-  const resolved = new URL(input, origin).href;
-  assertLocalHttpUrl(resolved, "fetch target");
-  return resolved;
+const ALLOWED_HOSTS = ["localhost", "127.0.0.1", "::1"];
+
+function sanitizeUrl(input) {
+  const resolved = new URL(input, origin);
+  if (!["http:", "https:"].includes(resolved.protocol)) {
+    throw new Error(`Unsafe protocol: ${resolved.protocol}`);
+  }
+  if (!ALLOWED_HOSTS.includes(resolved.hostname)) {
+    throw new Error(`Unsafe host: ${resolved.hostname}`);
+  }
+  return resolved.href;
 }
 
 async function safeFetch(input, init) {
-  return fetch(safeUrl(input), init);
+  return fetch(sanitizeUrl(input), init);
 }
 
 const screenshots = await mkdtemp(join(tmpdir(), "portfolio-browser-"));
-const debuggerListUrl = new URL("/json/list", debuggerUrl).href;
-assertLocalHttpUrl(debuggerListUrl, "debuggerListUrl");
-const targets = await fetch(debuggerListUrl).then((response) => response.json());
+const targets = await safeFetch(new URL("/json/list", debuggerUrl).href).then((response) => response.json());
 const target = targets.find((target) => target.type === "page");
 assert.ok(target, "A dedicated browser debugging session must be running");
 const socket = new WebSocket(target.webSocketDebuggerUrl);
