@@ -28,14 +28,14 @@ function assertLocalHttpUrl(value, label) {
 assertLocalHttpUrl(origin, "origin");
 assertLocalHttpUrl(debuggerUrl, "debuggerUrl");
 
-const ALLOWED_HOSTS = ["localhost", "127.0.0.1", "::1"];
+const ALLOWED_HOSTS = new Set(["localhost", "127.0.0.1", "::1"]);
 
 function sanitizeUrl(input) {
   const resolved = new URL(input, origin);
   if (!["http:", "https:"].includes(resolved.protocol)) {
     throw new Error(`Unsafe protocol: ${resolved.protocol}`);
   }
-  if (!ALLOWED_HOSTS.includes(resolved.hostname)) {
+  if (!ALLOWED_HOSTS.has(resolved.hostname)) {
     throw new Error(`Unsafe host: ${resolved.hostname}`);
   }
   return resolved.href;
