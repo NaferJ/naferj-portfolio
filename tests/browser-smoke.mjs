@@ -28,6 +28,16 @@ function assertLocalHttpUrl(value, label) {
 assertLocalHttpUrl(origin, "origin");
 assertLocalHttpUrl(debuggerUrl, "debuggerUrl");
 
+function safeUrl(input) {
+  const resolved = new URL(input, origin).href;
+  assertLocalHttpUrl(resolved, "fetch target");
+  return resolved;
+}
+
+async function safeFetch(input, init) {
+  return fetch(safeUrl(input), init);
+}
+
 const screenshots = await mkdtemp(join(tmpdir(), "portfolio-browser-"));
 const debuggerListUrl = new URL("/json/list", debuggerUrl).href;
 assertLocalHttpUrl(debuggerListUrl, "debuggerListUrl");
@@ -99,7 +109,7 @@ try {
   const firstArticle = posts[0] ? `/writing/${posts[0].slug}` : undefined;
   await viewport(1440, 1000);
   for (const route of routes) {
-    assert.equal((await fetch(`${origin}${route}`)).status, 200, route);
+    assert.equal((await safeFetch(`${origin}${route}`)).status, 200, route);
     await navigate(route);
     await waitFor(`[...document.images].filter(image => { const rect = image.getBoundingClientRect(); return rect.width > 0 && rect.height > 0 && rect.top < innerHeight && rect.bottom > 0 && !image.closest('details:not([open])'); }).every(image => image.complete && image.naturalWidth > 0)`);
     const state = await evaluate(`({ title: document.title, headings: document.querySelectorAll('main h1').length, overflow: document.documentElement.scrollWidth > innerWidth, robots: document.querySelector('meta[name="robots"]')?.content, links: [...document.querySelectorAll('a[href]')].map(a => a.getAttribute('href')), missingImages: [...document.images].filter(image => image.complete && image.naturalWidth === 0 && !image.closest('details:not([open])')).map(image => image.getAttribute('src')) })`);
@@ -114,8 +124,8 @@ try {
     if (route === firstArticle) await screenshot("article");
     if (route === "/writing") await screenshot("writing");
   }
-  for (const href of links) assert.equal((await fetch(new URL(href, origin))).status, 200, `internal link ${href}`);
-  for (const route of ["/missing-page", "/writing/missing-post", "/projects/missing-project"]) assert.equal((await fetch(`${origin}${route}`)).status, 404, route);
+  for (const href of links) assert.equal((await safeFetch(new URL(href, origin))).status, 200, `internal link ${href}`);
+  for (const route of ["/missing-page", "/writing/missing-post", "/projects/missing-project"]) assert.equal((await safeFetch(`${origin}${route}`)).status, 404, route);
   console.log("PASS internal links and missing-route 404s");
   await navigate("/");
   await evaluate(`document.querySelector('nav[aria-label="Primary navigation"] a[href="/writing"]').click()`);
@@ -166,9 +176,9 @@ try {
     assert.notEqual(await evaluate("document.activeElement.getAttribute('aria-label')"), before);
   }
   console.log("PASS skip link and keyboard contribution navigation");
-  assert.equal((await fetch(`${origin}/opengraph-image`)).headers.get("content-type"), "image/png");
-  if (!site.indexable || !site.url) assert.match(await fetch(`${origin}/robots.txt`).then((response) => response.text()), /Disallow: \//);
-  assert.equal((await fetch(`${origin}/sitemap.xml`)).status, 200);
+  assert.equal((await safeFetch(`${origin}/opengraph-image`)).headers.get("content-type"), "image/png");
+  if (!site.indexable || !site.url) assert.match(await safeFetch(`${origin}/robots.txt`).then((response) => response.text()), /Disallow: \//);
+  assert.equal((await safeFetch(`${origin}/sitemap.xml`)).status, 200);
   assert.deepEqual(exceptions, []);
   console.log("PASS metadata assets, robots, sitemap, and no runtime errors");
 } finally {
