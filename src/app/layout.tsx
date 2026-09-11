@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { routing } from "@/i18n/routing";
@@ -9,6 +10,10 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

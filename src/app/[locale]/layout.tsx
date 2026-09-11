@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title: `${site.name} · ${title}`,
       description,
       locale: locale === "es" ? "es_ES" : "en_US",
+      url: siteUrl ? `${siteUrl.origin}/${locale}` : undefined,
     },
     twitter: { card: "summary_large_image", site: twitterHandle ? `@${twitterHandle}` : undefined, creator: twitterHandle ? `@${twitterHandle}` : undefined },
   };
@@ -44,9 +45,21 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
   const { locale } = await params;
   setRequestLocale(locale);
   const messages = await getMessages();
+  const siteUrl = getSiteUrl();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: site.name,
+    url: siteUrl ? siteUrl.href : undefined,
+    image: siteUrl ? new URL(site.avatar, siteUrl).href : undefined,
+    jobTitle: locale === "es" ? "Desarrollador full stack" : "Full stack developer",
+    description: getDescription(locale),
+    sameAs: [site.github, site.linkedin, site.twitter, site.instagram, site.coffee].filter(Boolean),
+  };
 
   return (
     <NextIntlClientProvider messages={messages}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <a href="#main-content" className="skip-link">Skip to content</a>
       {children}
     </NextIntlClientProvider>

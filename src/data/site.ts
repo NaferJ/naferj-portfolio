@@ -1,7 +1,7 @@
 export const site = {
   name: "NaferJ",
   initials: "NJ",
-  description: "Software, systems, and notes on building things that last.",
+  description: "Full stack developer building software end to end — projects, experience, and notes on building useful things that last.",
   url: "https://naferj.com",
   indexable: true,
   avatar: "/profile/avatar.png",
@@ -25,7 +25,7 @@ export const site = {
 } as const;
 
 export const siteDescriptionEs =
-  "Software, sistemas y notas sobre construir cosas que perduren.";
+  "Desarrollador full stack construyendo software de extremo a extremo — proyectos, experiencia y notas sobre construir cosas que perduren.";
 
 export function getSiteUrl(): URL | undefined {
   if (!site.url) return undefined;
