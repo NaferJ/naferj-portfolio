@@ -16,7 +16,7 @@ export function Intro() {
         </div>
       </div>
       <h1 className="max-w-xl text-pretty text-[28px] leading-[1.45] font-medium tracking-[-0.04em] text-foreground sm:text-[34px]">
-        {t("headlinePrefix")} <RotatingWord /><br className="hidden sm:block" /> {t("headlineSuffix")}<span className="text-highlight">.</span>
+        {t("headlinePrefix")} <RotatingWord /><br /> {t("headlineSuffix")}<span className="text-highlight">.</span>
       </h1>
       <p className="mt-6 text-[15px] leading-7 text-neutral-400">{t("intro")}</p>
       <p className="mt-3 text-[15px] leading-7 text-neutral-400">
