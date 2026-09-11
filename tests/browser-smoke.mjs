@@ -29,7 +29,9 @@ assertLocalHttpUrl(origin, "origin");
 assertLocalHttpUrl(debuggerUrl, "debuggerUrl");
 
 const screenshots = await mkdtemp(join(tmpdir(), "portfolio-browser-"));
-const targets = await fetch(`${debuggerUrl}/json/list`).then((response) => response.json());
+const debuggerListUrl = new URL("/json/list", debuggerUrl).href;
+assertLocalHttpUrl(debuggerListUrl, "debuggerListUrl");
+const targets = await fetch(debuggerListUrl).then((response) => response.json());
 const target = targets.find((target) => target.type === "page");
 assert.ok(target, "A dedicated browser debugging session must be running");
 const socket = new WebSocket(target.webSocketDebuggerUrl);

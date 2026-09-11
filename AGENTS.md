@@ -27,6 +27,19 @@ Do not invent issue or PR formats. The assistant never commits, pushes, rewrites
 - `npm run build` — create the production build
 - `npm run start` — serve the production build
 
+### Windows / cross-platform lock file note
+
+CI runs on `ubuntu-latest`. Some dependencies (e.g. `@img/sharp`, native WASM bindings) have platform-specific optional dependencies. **`npm install` on Windows silently drops the Linux-only optional dependency entries from `package-lock.json`**, which then breaks `npm ci` in CI with `Missing: ... from lock file` errors.
+
+Rules to avoid this:
+1. **Never run plain `npm install` on Windows** after the lock file is correct — it rewrites the lock and strips Linux entries. Use `npm ci` for routine local installs instead; it only reads the lock, never rewrites it.
+2. **When adding/updating a dependency**, regenerate the lock file in a Linux container so both platforms' optional deps are recorded:
+   ```powershell
+   docker run --rm -v "${PWD}:/app" -w /app node:22 sh -c "npm install --no-audit --no-fund"
+   ```
+   Then run `npm ci` locally (Windows) to install from the corrected lock without touching it again.
+3. Verify before pushing: `docker run --rm -v "${PWD}:/app" -w /app node:22 sh -c "rm -rf node_modules && npm ci --ignore-scripts"` should succeed with no errors — this exactly mirrors CI.
+
 ## Code conventions
 
 - English only in code, comments, logs, identifiers, and commit messages.

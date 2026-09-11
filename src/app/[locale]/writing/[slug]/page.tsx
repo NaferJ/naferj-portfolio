@@ -3,11 +3,17 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { SiteShell } from "@/components/SiteShell";
-import { getPost, getPosts, formatDate, readingMinutes } from "@/data/writing";
+import { getPost, getPosts, formatDate, readingMinutes, type ArticleBlock } from "@/data/writing";
 import { getSiteUrl, site } from "@/data/site";
 import { routing } from "@/i18n/routing";
 
 type Props = Readonly<{ params: Promise<{ locale: string; slug: string }> }>;
+
+function blockKey(block: ArticleBlock): string {
+  if (block.type === "heading") return block.id;
+  if (block.type === "list") return block.items.join("");
+  return block.text;
+}
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -48,7 +54,7 @@ export default async function WritingPostPage({ params }: Props) {
         {post.sample ? <p className="mt-5 rounded-lg border border-rail bg-muted/40 px-4 py-3 text-xs leading-6 text-muted-foreground">{t("sampleNotice")}</p> : null}
         <div className="article-body mt-8">
           {post.body.map((block) => {
-            const key = block.type === "heading" ? block.id : block.type === "list" ? block.items.join("") : block.text;
+            const key = blockKey(block);
             switch (block.type) {
               case "paragraph": return <p key={key}>{block.text}</p>;
               case "heading": return <h2 key={key} id={block.id}>{block.text}</h2>;
