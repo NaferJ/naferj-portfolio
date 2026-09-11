@@ -155,14 +155,19 @@ async function fetchPublicContributionCalendar(
 ): Promise<{ dailyCounts: Map<string, number>; total: number; from: string; to: string } | null> {
   const url = `https://github.com/users/${username}/contributions`;
 
-  const response = await fetch(url, {
-    headers: {
-      "Accept-Language": "en-US,en;q=0.9",
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-    },
-    next: { revalidate: REVALIDATE_SECONDS },
-    signal: AbortSignal.timeout(8000),
-  });
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      headers: {
+        "Accept-Language": "en-US,en;q=0.9",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      },
+      next: { revalidate: REVALIDATE_SECONDS },
+      signal: AbortSignal.timeout(8000),
+    });
+  } catch {
+    return null;
+  }
 
   if (!response.ok) return null;
 

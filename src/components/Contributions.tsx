@@ -1,11 +1,28 @@
 import { getTranslations } from "next-intl/server";
 import { unstable_cache } from "next/cache";
 import { getContributions } from "@/lib/github";
+import type { ContributionSummary } from "@/lib/github";
 import { TopContributionsPanel } from "@/components/TopContributionsPanel";
 import { HeatmapClient } from "@/components/HeatmapClient";
 import { site } from "@/data/site";
 
-const getCachedContributions = unstable_cache(getContributions, ["github-contributions"], { revalidate: 60 * 60 * 6 });
+const cachedGetContributions = unstable_cache(
+  async () => {
+    const data = await getContributions();
+    if (!data) throw new Error("Contributions unavailable");
+    return data;
+  },
+  ["github-contributions"],
+  { revalidate: 60 * 60 * 6 },
+);
+
+async function getCachedContributions(): Promise<ContributionSummary | null> {
+  try {
+    return await cachedGetContributions();
+  } catch {
+    return null;
+  }
+}
 
 export async function Contributions() {
   const data = await getCachedContributions();
