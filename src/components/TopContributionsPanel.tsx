@@ -40,7 +40,7 @@ export function TopContributionsPanel({ repositories }: { repositories: TopRepos
           <ul className="divide-y divide-rail border-t border-rail">
             {repositories.map((repository) => (
               <li key={repository.url}>
-                <a className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-accent" href={repository.url} target="_blank" rel="noopener noreferrer">
+                <a className="flex items-center gap-3 px-4 py-3 transition-colors duration-200 ease-out hover:bg-accent" href={repository.url} target="_blank" rel="noopener noreferrer">
                   <Image src={repository.owner.avatarUrl} alt="" width={24} height={24} className="size-6 shrink-0 rounded-md" unoptimized />
                   <div className="min-w-0 flex-1"><p className="truncate text-xs text-neutral-200">{repository.name}</p>{repository.language ? <p className="mt-1 text-[10px] text-muted-foreground">{repository.language.name}</p> : null}</div>
                   <span className="shrink-0 text-xs text-neutral-400" aria-label={`${repository.contributions} contributions`}>{new Intl.NumberFormat("en-US").format(repository.contributions)}</span>

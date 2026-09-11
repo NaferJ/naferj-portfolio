@@ -6,7 +6,7 @@ import { getPosts, readingMinutes } from "@/data/writing";
 export function WritingRail({ locale }: { locale: string }) {
   const t = useTranslations("writingRail");
   const tArticle = useTranslations("article");
-  const posts = getPosts().slice(0, 4);
+  const posts = getPosts(locale).slice(0, 4);
 
   return (
     <aside aria-label="Writing index" className="hidden border-l border-rail lg:block">
@@ -16,7 +16,7 @@ export function WritingRail({ locale }: { locale: string }) {
         </Link>
         <p className="mt-3 text-xs leading-6 text-muted-foreground">{t("description")}</p>
         <div className="mt-12">
-          <h2 className="eyebrow">{t("recentWriting")}</h2>
+          <h2 className="text-xs font-medium text-foreground">{t("recentWriting")}</h2>
         </div>
         <ul className="mt-3 flex flex-col gap-5">
           {posts.map((post) => (
@@ -29,7 +29,7 @@ export function WritingRail({ locale }: { locale: string }) {
           ))}
         </ul>
         {posts.length === 0 ? <p className="mt-5 text-sm text-muted-foreground">{t("empty")}</p> : null}
-        <Link href={`/${locale}/writing`} className="mt-5 inline-flex items-center gap-2 text-xs text-neutral-300 hover:text-white">{t("allWriting")} <Icon name="arrow" className="size-3.5" /></Link>
+        <Link href={`/${locale}/writing`} className="mt-5 inline-flex items-center gap-2 text-xs text-neutral-300 transition-colors duration-200 ease-out hover:text-white">{t("allWriting")} <Icon name="arrow" className="size-3.5" /></Link>
         <div className="mt-auto pt-16">
           <p className="text-xs leading-6 text-muted-foreground">{t("workInProgress")}<br />{t("byDesign")}</p>
         </div>

@@ -4,11 +4,16 @@ import { Projects } from "@/components/Projects";
 import { SiteShell } from "@/components/SiteShell";
 import { getSiteUrl } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Projects",
-  description: "A collection of software projects, experiments, and case studies.",
-  alternates: { canonical: getSiteUrl() ? "/projects" : undefined },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const siteUrl = getSiteUrl();
+  const path = `/${locale}/projects`;
+  return {
+    title: "Projects",
+    description: "A collection of software projects, experiments, and case studies.",
+    alternates: { canonical: siteUrl ? path : undefined },
+  };
+}
 
 export default async function ProjectsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

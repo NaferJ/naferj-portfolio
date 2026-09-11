@@ -1,12 +1,11 @@
 export const site = {
   name: "NaferJ",
   initials: "NJ",
-  description:
-    "NaferJ's personal corner of the internet. Software, systems, and notes on building things that last.",
+  description: "Software, systems, and notes on building things that last.",
   url: "",
   indexable: false,
   avatar: "/profile/avatar.png",
-  email: "",
+  email: "contacto@naferj.com",
   github: "https://github.com/NaferJ",
   linkedin: "https://www.linkedin.com/in/naferj/",
   instagram: "https://www.instagram.com/naferjml/",
@@ -18,12 +17,15 @@ export const site = {
     image: "/logos/poxyram.svg",
   },
   navigation: [
-    { href: "", label: "overview", icon: "home" },
-    { href: "experience", label: "experience", icon: "experience" },
-    { href: "projects", label: "projects", icon: "projects" },
-    { href: "writing", label: "writing", icon: "writing" },
+    { href: "/", label: "overview", icon: "home" },
+    { href: "/experience", label: "experience", icon: "experience" },
+    { href: "/projects", label: "projects", icon: "projects" },
+    { href: "/writing", label: "writing", icon: "writing" },
   ],
 } as const;
+
+export const siteDescriptionEs =
+  "Software, sistemas y notas sobre construir cosas que perduren.";
 
 export function getSiteUrl(): URL | undefined {
   if (!site.url) return undefined;
@@ -32,4 +34,8 @@ export function getSiteUrl(): URL | undefined {
     throw new Error("The portfolio URL must use HTTP or HTTPS.");
   }
   return url;
+}
+
+export function getDescription(locale?: string): string {
+  return locale === "es" ? siteDescriptionEs : site.description;
 }

@@ -6,16 +6,16 @@
     "writing": "Writing"
   },
   "intro": {
-    "title": "Backend engineer building systems, tools, and the occasional side project.",
-    "intro": "Full stack developer who builds end-to-end — from database to deploy, plus the occasional side project.",
-    "currentWorkPrefix": "Currently spearheading backend development at",
-    "currentWorkDescription": "building a full backend reference implementation for their platform.",
+    "title": "Full stack developer",
+    "intro": "Full stack developer who builds end to end — from database to deployment, plus the occasional side project.",
+    "currentWorkPrefix": "Currently leading backend development at",
+    "currentWorkDescription": "where I'm building a complete backend reference implementation for their platform.",
     "headlinePrefix": "Building",
-    "headlineSuffix": "and bring ideas to life"
+    "headlineSuffix": "and bringing ideas to life"
   },
   "sections": {
     "projects": "Projects",
-    "projectsDescription": "The most recent things I have built.",
+    "projectsDescription": "The most recent things I've built.",
     "viewAll": "View all",
     "aiAgents": "AI & Agents",
     "writing": "Writing"
@@ -33,7 +33,7 @@
     "title": "Writing",
     "description": "Notes on software, building useful things, and learning in public.",
     "allWriting": "All writing",
-    "empty": "New writing will appear here when it is ready.",
+    "empty": "New writing will appear here when it's ready.",
     "nothingPublished": "Nothing published yet."
   },
   "writingRail": {
@@ -73,7 +73,7 @@
   },
   "notFound": {
     "title": "Nothing here. Yet.",
-    "description": "This page may have moved, or the link might not be quite right. There is still plenty to explore.",
+    "description": "This page may have moved, or the link might not be quite right. There's still plenty to explore.",
     "backToOverview": "Back to the overview",
     "readWriting": "Read writing"
   }

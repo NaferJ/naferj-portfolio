@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { site, getSiteUrl } from "../src/data/site.ts";
 import { projects, getProject } from "../src/data/projects.ts";
-import { posts, publications, getPosts, getPost, readingMinutes, formatDate } from "../src/data/writing.ts";
+import { postsEn, publications, getPosts, getPost, readingMinutes, formatDate } from "../src/data/writing.ts";
 
 function assertUnique(values) {
   assert.equal(new Set(values).size, values.length);
@@ -37,7 +37,7 @@ test("projects have unique routable slugs and complete case studies", () => {
 });
 
 test("writing has unique slugs, heading anchors, valid dates, and reading times", () => {
-  assertUnique(posts.map((post) => post.slug));
+  assertUnique(postsEn.map((post) => post.slug));
   for (const post of getPosts()) {
     assert.match(post.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
     assert.match(post.date, /^\d{4}-\d{2}-\d{2}$/);
@@ -54,13 +54,13 @@ test("writing has unique slugs, heading anchors, valid dates, and reading times"
 });
 
 test("draft posts are excluded from lists and direct lookups", () => {
-  const draft = { ...posts[0], slug: "unpublished-test", draft: true };
-  posts.push(draft);
+  const draft = { ...postsEn[0], slug: "unpublished-test", draft: true };
+  postsEn.push(draft);
   try {
     assert.equal(getPost(draft.slug), undefined);
     assert.ok(getPosts().every((post) => !post.draft));
   } finally {
-    posts.pop();
+    postsEn.pop();
   }
 });
 

@@ -11,18 +11,19 @@ type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    getPosts().map((post) => ({ locale, slug: post.slug }))
+    getPosts(locale).map((post) => ({ locale, slug: post.slug }))
   );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPost(slug);
+  const { locale, slug } = await params;
+  const post = getPost(slug, locale);
   if (!post) return {};
+  const siteUrl = getSiteUrl();
   return {
     title: post.title,
     description: post.description,
-    alternates: { canonical: getSiteUrl() ? `/writing/${post.slug}` : undefined },
+    alternates: { canonical: siteUrl ? `/${locale}/writing/${post.slug}` : undefined },
     robots: { index: site.indexable && !post.sample, follow: site.indexable && !post.sample },
     openGraph: { title: post.title, description: post.description },
     twitter: { card: "summary_large_image", title: post.title, description: post.description },
@@ -32,18 +33,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function WritingPostPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const post = getPost(slug);
+  const post = getPost(slug, locale);
   if (!post) notFound();
   const t = await getTranslations("article");
 
-  const morePosts = getPosts().filter((p) => p.slug !== slug).slice(0, 2);
+  const morePosts = getPosts(locale).filter((p) => p.slug !== slug).slice(0, 2);
 
   return (
     <SiteShell locale={locale}>
-      <Link href={`/${locale}/writing`} className="text-xs text-muted-foreground hover:text-foreground">&larr; {t("back")}</Link>
+      <Link href={`/${locale}/writing`} className="text-xs text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground">&larr; {t("back")}</Link>
       <article className="mt-10">
         <h1 className="page-title">{post.title}</h1>
-        <p className="mt-4 text-sm text-muted-foreground">{formatDate(post.date)} &middot; {readingMinutes(post)} {t("minRead")}{post.sample ? " \u00b7 Sample" : ""}</p>
+        <p className="mt-4 text-sm text-muted-foreground">{formatDate(post.date, locale)} &middot; {readingMinutes(post)} {t("minRead")}{post.sample ? " \u00b7 Sample" : ""}</p>
         {post.sample ? <p className="mt-5 rounded-lg border border-rail bg-muted/40 px-4 py-3 text-xs leading-6 text-muted-foreground">{t("sampleNotice")}</p> : null}
         <div className="article-body mt-8">
           {post.body.map((block, index) => {

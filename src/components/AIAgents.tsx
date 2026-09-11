@@ -1,9 +1,13 @@
-import { useTranslations } from "next-intl";
+"use client";
+
+import { useLocale, useTranslations } from "next-intl";
 import { Icon } from "@/components/Icon";
-import { agentItems } from "@/data/ai-agents";
+import { getAgentItems } from "@/data/ai-agents";
 
 export function AIAgents() {
   const t = useTranslations("sections");
+  const locale = useLocale();
+  const agentItems = getAgentItems(locale);
 
   return (
     <section id="ai-agents" aria-labelledby="ai-agents-heading">
@@ -17,7 +21,7 @@ export function AIAgents() {
             <div className="min-w-0 flex-1">
               <p className="text-sm font-normal leading-6 text-foreground">
                 {item.href ? (
-                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="underline decoration-transparent underline-offset-4 transition-[text-decoration-color] hover:decoration-foreground/30">{item.name}</a>
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-200 ease-out hover:decoration-foreground/30">{item.name}</a>
                 ) : (
                   item.name
                 )}

@@ -11,7 +11,7 @@ export type Experience = {
   href?: string;
 };
 
-export const experience: Experience[] = [
+export const experienceEn: Experience[] = [
   {
     company: "Poxyram Studio",
     logo: "/logos/poxyram.svg",
@@ -41,3 +41,40 @@ export const experience: Experience[] = [
     ],
   },
 ];
+
+export const experienceEs: Experience[] = [
+  {
+    company: "Poxyram Studio",
+    logo: "/logos/poxyram.svg",
+    period: "Jun 2026 a la fecha",
+    href: "https://www.instagram.com/poxyram/",
+    roles: [
+      {
+        role: "Ingeniero de backend · Contrato",
+        period: "Jun 2026 a la fecha",
+      },
+    ],
+  },
+  {
+    company: "LM SOLUCIONES SAS",
+    logo: "/logos/lm-soluciones.svg",
+    period: "Jan 2023 a Oct 2025",
+    href: "https://www.lmsoluciones.co/",
+    roles: [
+      {
+        role: "Desarrollador web",
+        period: "Dec 2023 a Oct 2025",
+      },
+      {
+        role: "Aprendiz de soporte técnico",
+        period: "Jan 2023 a Dec 2023",
+      },
+    ],
+  },
+];
+
+export const experience = experienceEn;
+
+export function getExperience(locale?: string): Experience[] {
+  return locale === "es" ? experienceEs : experienceEn;
+}

@@ -6,7 +6,7 @@ export type AgentItem = {
   sample?: boolean;
 };
 
-export const agentItems: AgentItem[] = [
+export const agentItemsEn: AgentItem[] = [
   {
     name: "Devin as dev agent",
     href: "https://devin.ai",
@@ -28,3 +28,32 @@ export const agentItems: AgentItem[] = [
     status: "Live",
   },
 ];
+
+export const agentItemsEs: AgentItem[] = [
+  {
+    name: "Devin como agente de desarrollo",
+    href: "https://devin.ai",
+    description:
+      "Devin Desktop es mi IDE, emparejado con distintos modelos según la tarea: GLM-5.2 High, SWE-1.7 Max, GPT-5.6, Claude Sonnet 5.",
+    status: "En uso",
+  },
+  {
+    name: "Reglas del repositorio y configuración del agente",
+    description:
+      "AGENTS.md y las plantillas estandarizan cómo trabajan los agentes entre repositorios: commits, PRs e issues.",
+    status: "En construcción",
+  },
+  {
+    name: "Controles de revisión automatizados",
+    href: "https://github.com/NaferJ/luisardito-frontend/pull/16",
+    description:
+      "SonarCloud, GitGuardian, lint y typecheck controlan cada PR antes de fusionarlo.",
+    status: "En uso",
+  },
+];
+
+export const agentItems = agentItemsEn;
+
+export function getAgentItems(locale?: string): AgentItem[] {
+  return locale === "es" ? agentItemsEs : agentItemsEn;
+}

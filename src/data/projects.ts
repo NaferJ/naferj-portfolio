@@ -10,7 +10,7 @@ export type Project = {
   sections: { title: string; text: string }[];
 };
 
-export const projects: Project[] = [
+export const projectsEn: Project[] = [
   {
     slug: "personal-portfolio",
     name: "Personal portfolio",
@@ -97,6 +97,99 @@ export const projects: Project[] = [
   },
 ];
 
-export function getProject(slug: string): Project | undefined {
-  return projects.find((project) => project.slug === slug);
+export const projectsEs: Project[] = [
+  {
+    slug: "personal-portfolio",
+    name: "Portafolio personal",
+    description: "Un espacio para mi trabajo, escritos y lo que voy aprendiendo en el camino.",
+    type: "web",
+    year: "2026",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    href: "https://naferj.com",
+    sections: [
+      {
+        title: "Un lugar para el trabajo",
+        text: "Este sitio reúne proyectos, experiencia y escritos en un espacio tranquilo y legible. El diseño de dos columnas mantiene los escritos recientes a mano mientras deja la columna principal centrada en la página que se está leyendo.",
+      },
+      {
+        title: "Hecho para seguir siendo sencillo",
+        text: "Las páginas se renderizan en el servidor, mientras que pequeños componentes interactivos manejan el estado de navegación y los filtros. La información del perfil, los proyectos y las publicaciones residen en módulos de datos tipados, separados de la presentación.",
+      },
+      {
+        title: "Espacio para crecer",
+        text: "La sección de escritos admite artículos individuales y una lista opcional de publicaciones externas. El contenido puede migrarse a un CMS más adelante sin rediseñar la experiencia de lectura.",
+      },
+    ],
+  },
+  {
+    slug: "poxyram",
+    name: "Poxyram",
+    description: "Plataforma backend y API para Poxyram Studio.",
+    type: "API",
+    year: "2025",
+    stack: ["TypeScript", "Node.js", "PostgreSQL"],
+    href: "https://api.poxyram.com",
+    sections: [
+      {
+        title: "La plataforma",
+        text: "Poxyram Studio necesitaba un backend que pudiera gestionar las operaciones de su plataforma de principio a fin. Construí la API desde cero, cubriendo los modelos de datos, la autenticación y los servicios de los que depende su frontend.",
+      },
+      {
+        title: "El enfoque",
+        text: "El backend está estructurado con límites de servicio claros y contratos tipados entre capas. Cada endpoint está documentado y probado, y el esquema de base de datos está versionado para que las migraciones sean predecibles.",
+      },
+      {
+        title: "El resultado",
+        text: "La API está en uso y sirviendo la plataforma. Gestiona las operaciones diarias de Poxyram Studio y está preparada para crecer junto con el producto.",
+      },
+    ],
+  },
+  {
+    slug: "luisardito-shop",
+    name: "Luisardito Shop",
+    description: "Tienda en línea para Luisardito.",
+    type: "web",
+    year: "2025",
+    stack: ["Next.js", "React", "TypeScript"],
+    href: "https://luisardito.com",
+    sections: [
+      {
+        title: "La tienda",
+        text: "Una tienda en línea construida para Luisardito. El frontend es rápido, accesible y fácil de gestionar, con un flujo de compra que no estorba.",
+      },
+      {
+        title: "El enfoque",
+        text: "Construida con Next.js y TypeScript. Las páginas se renderizan en el servidor para velocidad y SEO, con interactividad del lado del cliente solo donde se necesita.",
+      },
+      {
+        title: "El resultado",
+        text: "La tienda está en línea y atendiendo clientes. Está diseñada para crecer con el catálogo sin necesidad de reconstruirse.",
+      },
+    ],
+  },
+  {
+    slug: "redlink-agency",
+    name: "Redlink Agency",
+    description: "Sitio web para Redlink Agency.",
+    type: "web",
+    year: "2025",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    href: "https://redlinkagency.com",
+    sections: [
+      {
+        title: "El sitio",
+        text: "Un sitio web para Redlink Agency construido para presentar sus servicios y trabajo.",
+      },
+    ],
+  },
+];
+
+export const projects = projectsEn;
+
+export function getProjects(locale?: string): Project[] {
+  return locale === "es" ? projectsEs : projectsEn;
+}
+
+export function getProject(slug: string, locale?: string): Project | undefined {
+  return getProjects(locale).find((project) => project.slug === slug);
 }

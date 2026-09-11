@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { experience } from "@/data/experience";
+import { useLocale, useTranslations } from "next-intl";
+import { getExperience } from "@/data/experience";
 
 export function Experience() {
   const t = useTranslations("experience");
+  const locale = useLocale();
+  const experience = getExperience(locale);
 
   return (
     <section

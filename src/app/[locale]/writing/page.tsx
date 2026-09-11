@@ -5,11 +5,17 @@ import { WritingIndex } from "@/components/WritingIndex";
 import { getPosts } from "@/data/writing";
 import { getSiteUrl } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Writing",
-  description: "Notes on software, building useful things, and learning in public.",
-  alternates: { canonical: getSiteUrl() ? "/writing" : undefined },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations("writing");
+  const siteUrl = getSiteUrl();
+  const path = `/${locale}/writing`;
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: { canonical: siteUrl ? path : undefined },
+  };
+}
 
 export default async function WritingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -21,7 +27,7 @@ export default async function WritingPage({ params }: { params: Promise<{ locale
       <h1 className="page-title">{t("title")}</h1>
       <p className="mt-4 text-sm leading-7 text-neutral-400">{t("description")}</p>
       <h2 className="sr-only">Articles</h2>
-      <WritingIndex posts={getPosts()} locale={locale} />
+      <WritingIndex posts={getPosts(locale)} locale={locale} />
     </SiteShell>
   );
 }

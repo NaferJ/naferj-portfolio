@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { AIAgents } from "@/components/AIAgents";
@@ -8,16 +9,36 @@ import { Projects } from "@/components/Projects";
 import { SiteShell } from "@/components/SiteShell";
 import { getPosts } from "@/data/writing";
 
+function ContributionsSkeleton() {
+  return (
+    <section id="contributions" aria-label="Contributions loading">
+      <div className="rounded-2xl border border-rail bg-[#111111] p-5">
+        <div className="mb-5 flex items-center gap-3">
+          <div className="h-4 w-48 animate-pulse rounded bg-rail" />
+          <div className="ml-auto h-3 w-20 animate-pulse rounded bg-rail" />
+        </div>
+        <div className="h-28 animate-pulse rounded bg-rail" />
+        <div className="mt-3 flex items-center justify-between">
+          <div className="h-3 w-24 animate-pulse rounded bg-rail" />
+          <div className="h-3 w-32 animate-pulse rounded bg-rail" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const posts = getPosts().slice(0, 2);
+  const posts = getPosts(locale).slice(0, 2);
 
   return (
     <SiteShell locale={locale}>
       <div className="space-y-12">
         <Intro />
-        <Contributions />
+        <Suspense fallback={<ContributionsSkeleton />}>
+          <Contributions />
+        </Suspense>
         <AIAgents />
         <Projects locale={locale} preview />
         <WritingPreview posts={posts} locale={locale} />

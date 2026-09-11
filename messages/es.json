@@ -6,53 +6,53 @@
     "writing": "Escritos"
   },
   "intro": {
-    "title": "Ingeniero backend construyendo sistemas, herramientas y algun proyecto paralelo de vez en cuando.",
-    "intro": "Desarrollador full stack que construye de extremo a extremo — desde la base de datos hasta el despliegue, mas algun proyecto paralelo de vez en cuando.",
+    "title": "Desarrollador full stack",
+    "intro": "Desarrollador full stack que construye de extremo a extremo — desde la base de datos hasta el despliegue, más algún proyecto paralelo de vez en cuando.",
     "currentWorkPrefix": "Actualmente liderando el desarrollo backend en",
-    "currentWorkDescription": "construyendo una implementacion de referencia completa del backend para su plataforma.",
+    "currentWorkDescription": "donde estoy construyendo una implementación de referencia completa del backend para su plataforma.",
     "headlinePrefix": "Construyendo",
     "headlineSuffix": "y dando vida a las ideas"
   },
   "sections": {
     "projects": "Proyectos",
-    "projectsDescription": "Lo mas reciente que he construido.",
+    "projectsDescription": "Lo más reciente que he construido.",
     "viewAll": "Ver todo",
-    "aiAgents": "IA y Agentes",
+    "aiAgents": "IA y agentes",
     "writing": "Escritos"
   },
   "projects": {
     "allProjects": "Todos los proyectos",
-    "year": "Ano",
+    "year": "Año",
     "builtWith": "Construido con",
     "visitProject": "Visitar proyecto",
     "exploreOthers": "Explorar los otros proyectos",
     "sampleNotice": "Este es un ejemplo editable, no un proyecto publicado. Reemplaza el nombre, el stack y el caso de estudio con tu propio trabajo.",
-    "empty": "Nuevo trabajo aparecera aqui pronto."
+    "empty": "Nuevo trabajo aparecerá aquí pronto."
   },
   "writing": {
     "title": "Escritos",
-    "description": "Notas sobre software, construir cosas utiles y aprender en publico.",
+    "description": "Notas sobre software, construir cosas útiles y aprender en público.",
     "allWriting": "Todos los escritos",
-    "empty": "Nuevos escritos apareceran aqui cuando esten listos.",
-    "nothingPublished": "Nada publicado todavia."
+    "empty": "Nuevos escritos aparecerán aquí cuando estén listos.",
+    "nothingPublished": "Nada publicado todavía."
   },
   "writingRail": {
     "title": "Escritos",
-    "description": "Articulos, notas y cosas aprendidas en el camino.",
+    "description": "Artículos, notas y cosas aprendidas en el camino.",
     "recentWriting": "Escritos recientes",
     "allWriting": "Todos los escritos",
     "workInProgress": "Un trabajo en progreso.",
-    "byDesign": "Por diseno.",
-    "empty": "La proxima nota todavia esta tomando forma."
+    "byDesign": "Por diseño.",
+    "empty": "La próxima nota todavía está tomando forma."
   },
   "article": {
-    "back": "Atras",
+    "back": "Atrás",
     "published": "Publicado",
     "minRead": "min de lectura",
     "keepReading": "Seguir leyendo",
     "thanksForReading": "Gracias por leer.",
     "backToTop": "Volver arriba",
-    "sampleNotice": "Este es contenido de muestra para la plantilla del portafolio, no un articulo previamente publicado. Reemplazalo con tu propia escritura antes del lanzamiento."
+    "sampleNotice": "Este es contenido de muestra para la plantilla del portafolio, no un artículo previamente publicado. Reemplázalo con tu propia escritura antes del lanzamiento."
   },
   "experience": {
     "title": "Experiencia",
@@ -64,16 +64,16 @@
     "viewProfile": "Ver perfil",
     "activity": "Actividad de {year}",
     "less": "Menos",
-    "more": "Mas",
+    "more": "Más",
     "topRepositories": "Repositorios principales",
-    "fallback": "El grafico de actividad en vivo esta en pausa. Todavia puedes explorar mis repositorios y trabajo reciente en GitHub."
+    "fallback": "El gráfico de actividad en vivo está tomando un descanso. Todavía puedes explorar mis repositorios y trabajo reciente en GitHub."
   },
   "footer": {
     "writing": "Escritos"
   },
   "notFound": {
-    "title": "Nada aqui. Todavia.",
-    "description": "Esta pagina puede haberse movido o el enlace podria no ser correcto. Todavia hay mucho por explorar.",
+    "title": "Nada aquí. Todavía.",
+    "description": "Esta página puede haberse movido o el enlace podría no ser correcto. Todavía hay mucho por explorar.",
     "backToOverview": "Volver al inicio",
     "readWriting": "Leer escritos"
   }
