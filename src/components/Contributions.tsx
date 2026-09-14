@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { unstable_cache } from "next/cache";
-import { getContributions } from "@/lib/github";
-import type { ContributionSummary } from "@/lib/github";
+import { getContributions, getTopRepositories } from "@/lib/github";
+import type { ContributionSummary, TopRepository } from "@/lib/github";
 import { TopContributionsPanel } from "@/components/TopContributionsPanel";
 import { HeatmapClient } from "@/components/HeatmapClient";
 import { site } from "@/data/site";
@@ -12,7 +12,7 @@ const cachedGetContributions = unstable_cache(
     if (!data) throw new Error("Contributions unavailable");
     return data;
   },
-  ["github-contributions"],
+  ["github-contributions-v2"],
   { revalidate: 60 * 60 * 6 },
 );
 
@@ -24,8 +24,33 @@ async function getCachedContributions(): Promise<ContributionSummary | null> {
   }
 }
 
+const cachedGetTopRepositories = unstable_cache(
+  async (login: string, from: string, to: string) => {
+    const repositories = await getTopRepositories(login, from, to);
+    if (!repositories) throw new Error("Top repositories unavailable");
+    return repositories;
+  },
+  ["github-top-repositories"],
+  { revalidate: 60 * 60 * 6 },
+);
+
+async function getCachedTopRepositories(
+  login: string,
+  from: string,
+  to: string,
+): Promise<TopRepository[] | null> {
+  try {
+    return await cachedGetTopRepositories(login, from, to);
+  } catch {
+    return null;
+  }
+}
+
 export async function Contributions() {
   const data = await getCachedContributions();
+  const repositories = data
+    ? await getCachedTopRepositories(data.login, data.from, data.to)
+    : null;
   const t = await getTranslations("contributions");
 
   return (
@@ -42,7 +67,7 @@ export async function Contributions() {
               <span>{t("activity", { year: data.year })}</span>
               <div aria-label="Contribution intensity from less to more" className="flex items-center gap-1.5"><span className="mr-1">{t("less")}</span>{[0.08, 0.3, 0.52, 0.76, 1].map((opacity) => <span key={opacity} aria-hidden="true" className="size-2 rounded-xs bg-highlight" style={{ opacity }} />)}<span className="ml-1">{t("more")}</span></div>
             </div>
-            {data.topRepositories.length ? <TopContributionsPanel repositories={data.topRepositories} /> : null}
+            <TopContributionsPanel repositories={repositories} />
           </>
         ) : <p className="text-xs leading-6 text-muted-foreground">{t("fallback")}</p>}
       </div>

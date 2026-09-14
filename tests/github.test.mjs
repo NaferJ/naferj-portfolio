@@ -17,8 +17,19 @@ test("public activity remains available without a token", async () => {
   const result = await withoutToken.getContributions();
   assert.ok(result);
   assert.equal(result.total, 3);
-  assert.deepEqual(result.topRepositories, []);
+  assert.equal(result.from, "2026-01-01");
+  assert.equal(result.to, "2026-09-10");
   assert.equal(result.weeks.flatMap((week) => week.days).find((day) => day.date === "2026-09-10")?.count, 3);
+});
+
+test("repository lookup is unavailable without a token", async () => {
+  let requested = false;
+  globalThis.fetch = async () => {
+    requested = true;
+    throw new Error("Repository API should not be called without a token");
+  };
+  assert.equal(await withoutToken.getTopRepositories("owner", "2026-01-01", "2026-09-10"), null);
+  assert.equal(requested, false);
 });
 
 test("network failure returns an unavailable state instead of crashing the page", async () => {
@@ -33,22 +44,25 @@ test("unavailable or changed GitHub markup returns an unavailable state", async 
   assert.equal(await withoutToken.getContributions(), null);
 });
 
-test("optional repository lookup failure does not hide the graph", async () => {
-  globalThis.fetch = async (url) => {
-    if (String(url).includes("graphql")) throw new Error("Simulated repository API outage");
-    return new Response(calendar);
+test("repository API outage returns null instead of crashing", async () => {
+  globalThis.fetch = async () => { throw new Error("Simulated repository API outage"); };
+  assert.equal(await withToken.getTopRepositories("owner", "2026-01-01", "2026-09-10"), null);
+});
+
+test("GraphQL error responses return null", async () => {
+  globalThis.fetch = async (url, options) => {
+    assert.equal(options.cache, "no-store");
+    assert.ok(options.signal instanceof AbortSignal);
+    return Response.json({ errors: [{ message: "Simulated GraphQL error" }] });
   };
-  const result = await withToken.getContributions();
-  assert.ok(result);
-  assert.equal(result.total, 3);
-  assert.deepEqual(result.topRepositories, []);
+  assert.equal(await withToken.getTopRepositories("owner", "2026-01-01", "2026-09-10"), null);
 });
 
 test("repository aggregation never returns private repositories", async () => {
   const repository = { name: "public-project", nameWithOwner: "owner/public-project", url: "https://github.com/owner/public-project", description: "Test fixture", isPrivate: false, stargazerCount: 2, primaryLanguage: null, owner: { login: "owner", avatarUrl: "https://github.com/owner.png" } };
   globalThis.fetch = async (url, options) => {
+    assert.equal(options.cache, "no-store");
     assert.ok(options.signal instanceof AbortSignal);
-    if (!String(url).includes("graphql")) return new Response(calendar);
     return Response.json({ data: { user: { login: "owner", contributionsCollection: {
       commitContributionsByRepository: [
         { repository, contributions: { totalCount: 3 } },
@@ -59,9 +73,46 @@ test("repository aggregation never returns private repositories", async () => {
       issueContributionsByRepository: [],
     } } } });
   };
-  const result = await withToken.getContributions();
+  const result = await withToken.getTopRepositories("owner", "2026-01-01", "2026-09-10");
   assert.ok(result);
-  assert.equal(result.topRepositories.length, 1);
-  assert.equal(result.topRepositories[0].fullName, "owner/public-project");
-  assert.equal(result.topRepositories[0].contributions, 5);
+  assert.equal(result.length, 1);
+  assert.equal(result[0].fullName, "owner/public-project");
+  assert.equal(result[0].contributions, 5);
+});
+
+test("empty contribution collections return an empty list", async () => {
+  globalThis.fetch = async (url, options) => {
+    assert.equal(options.cache, "no-store");
+    assert.ok(options.signal instanceof AbortSignal);
+    return Response.json({ data: { user: { login: "owner", contributionsCollection: {
+      commitContributionsByRepository: [],
+      pullRequestContributionsByRepository: [],
+      pullRequestReviewContributionsByRepository: [],
+      issueContributionsByRepository: [],
+    } } } });
+  };
+  assert.deepEqual(await withToken.getTopRepositories("owner", "2026-01-01", "2026-09-10"), []);
+});
+
+test("repository lookup recovers after a failed fetch", async () => {
+  const repository = { name: "public-project", nameWithOwner: "owner/public-project", url: "https://github.com/owner/public-project", description: "Test fixture", isPrivate: false, stargazerCount: 2, primaryLanguage: null, owner: { login: "owner", avatarUrl: "https://github.com/owner.png" } };
+  let attempts = 0;
+  globalThis.fetch = async (url, options) => {
+    attempts += 1;
+    assert.equal(options.cache, "no-store");
+    assert.ok(options.signal instanceof AbortSignal);
+    if (attempts === 1) throw new Error("Simulated repository API outage");
+    return Response.json({ data: { user: { login: "owner", contributionsCollection: {
+      commitContributionsByRepository: [{ repository, contributions: { totalCount: 3 } }],
+      pullRequestContributionsByRepository: [],
+      pullRequestReviewContributionsByRepository: [],
+      issueContributionsByRepository: [],
+    } } } });
+  };
+  assert.equal(await withToken.getTopRepositories("owner", "2026-01-01", "2026-09-10"), null);
+  const result = await withToken.getTopRepositories("owner", "2026-01-01", "2026-09-10");
+  assert.ok(result);
+  assert.equal(result.length, 1);
+  assert.equal(result[0].fullName, "owner/public-project");
+  assert.equal(attempts, 2);
 });

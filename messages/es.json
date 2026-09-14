@@ -102,6 +102,8 @@
     "less": "Menos",
     "more": "Más",
     "topRepositories": "Repositorios principales",
+    "repositoriesUnavailable": "La actividad de los repositorios principales no está disponible en este momento. Actualiza la página para volver a intentarlo.",
+    "noRepositories": "No se encontró actividad en repositorios públicos durante este período.",
     "fallback": "El gráfico de actividad en vivo está tomando un descanso. Todavía puedes explorar mis repositorios y trabajo reciente en GitHub."
   },
   "footer": {
