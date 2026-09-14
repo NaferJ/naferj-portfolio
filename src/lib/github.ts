@@ -43,7 +43,8 @@ export type ContributionSummary = {
   year: number;
   yearLabel: string;
   weeks: ContributionWeek[];
-  topRepositories: TopRepository[];
+  from: string;
+  to: string;
 };
 
 const LEVEL_THRESHOLDS = [0, 1, 4, 8, 12] as const;
@@ -196,34 +197,44 @@ async function fetchPublicContributionCalendar(
   return { dailyCounts, total, from, to };
 }
 
-async function fetchTopRepositories(
+export async function getTopRepositories(
   username: string,
   from: string,
   to: string,
 ): Promise<TopRepository[] | null> {
   if (!GITHUB_TOKEN) return null;
 
-  const response = await fetch(GITHUB_GRAPHQL_ENDPOINT, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${GITHUB_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: TOP_REPOSITORIES_QUERY,
-      variables: {
-        login: username,
-        from: toIsoDateString(from),
-        to: toIsoDateString(to, true),
+  let response: Response;
+  try {
+    response = await fetch(GITHUB_GRAPHQL_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+        "Content-Type": "application/json",
       },
-    }),
-    next: { revalidate: REVALIDATE_SECONDS },
-    signal: AbortSignal.timeout(8000),
-  });
+      body: JSON.stringify({
+        query: TOP_REPOSITORIES_QUERY,
+        variables: {
+          login: username,
+          from: toIsoDateString(from),
+          to: toIsoDateString(to, true),
+        },
+      }),
+      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+    });
+  } catch {
+    return null;
+  }
 
   if (!response.ok) return null;
 
-  const payload = (await response.json()) as TopRepositoriesResponse;
+  let payload: TopRepositoriesResponse;
+  try {
+    payload = (await response.json()) as TopRepositoriesResponse;
+  } catch {
+    return null;
+  }
 
   if (payload.errors || !payload.data?.user) return null;
 
@@ -281,12 +292,6 @@ export async function getContributions(): Promise<ContributionSummary | null> {
   const calendar = await fetchPublicContributionCalendar(GITHUB_USERNAME).catch(() => null);
   if (!calendar) return null;
 
-  const topRepositories = (await fetchTopRepositories(
-    GITHUB_USERNAME,
-    calendar.from,
-    calendar.to,
-  ).catch(() => null)) ?? [];
-
   const firstDay = new Date(`${calendar.from}T00:00:00.000Z`);
   const firstWeekday = firstDay.getUTCDay();
   const firstSunday = new Date(firstDay.getTime() - firstWeekday * DAY_MS);
@@ -332,6 +337,7 @@ export async function getContributions(): Promise<ContributionSummary | null> {
     year: endYear,
     yearLabel: "the last year",
     weeks,
-    topRepositories,
+    from: calendar.from,
+    to: calendar.to,
   };
 }

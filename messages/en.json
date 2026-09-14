@@ -102,6 +102,8 @@
     "less": "Less",
     "more": "More",
     "topRepositories": "Top repositories",
+    "repositoriesUnavailable": "Top repository activity is unavailable right now. Refresh the page to try again.",
+    "noRepositories": "No public repository activity was found for this period.",
     "fallback": "The live activity graph is taking a break. You can still explore my repositories and recent work on GitHub."
   },
   "footer": {
