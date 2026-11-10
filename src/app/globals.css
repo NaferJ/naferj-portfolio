@@ -476,10 +476,12 @@ html[data-at-end] .scroll-edge-bottom {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .motion-icon,
-  .motion-icon * {
-    transform: none !important;
-    animation: none !important;
+  .motion-trigger:hover .motion-icon,
+  .motion-trigger:focus-visible .motion-icon,
+  .motion-trigger:hover .motion-icon *,
+  .motion-trigger:focus-visible .motion-icon * {
+    transform: none;
+    animation: none;
   }
 }
 
@@ -507,10 +509,20 @@ a:focus-visible .sticker {
     scroll-behavior: auto;
   }
 
+  .skip-link,
+  .nav-indicator.nav-indicator-ready,
+  .scroll-edge {
+    transition: none;
+  }
+
+  .animate-fade-in-up {
+    animation: none;
+  }
+
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
   }
 }
 
@@ -521,7 +533,7 @@ a:focus-visible .sticker {
   }
 
   aside, nav, footer, .skip-link {
-    display: none !important;
+    display: none;
   }
 
   .article-body, .article-body h2, .article-body blockquote {

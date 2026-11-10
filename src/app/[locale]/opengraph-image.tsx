@@ -103,7 +103,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 40 }}>
             {socials.map((s) => (
               <div key={s.name} style={{ display: "flex" }}>
-                <svg width="30" height="30" viewBox="0 0 24 24" fill={muted}>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill={muted} aria-hidden="true">
                   <path d={s.path} />
                 </svg>
               </div>

@@ -9,14 +9,14 @@ export function Reveal({ children, index = 0, className }: Readonly<{ children: 
     const element = ref.current;
     if (!element) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      element.setAttribute("data-revealed", "");
+      element.dataset.revealed = "";
       return;
     }
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            entry.target.setAttribute("data-revealed", "");
+            (entry.target as HTMLElement).dataset.revealed = "";
             observer.unobserve(entry.target);
           }
         }
