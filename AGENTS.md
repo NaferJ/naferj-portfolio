@@ -98,6 +98,6 @@ Do not create separate project cards for pull requests. The issue card is the so
 
 ## Additional verification
 
-- With Node.js 22.18+ or 24, run `node --experimental-strip-types --test tests/content.test.mjs tests/github.test.mjs` for content contracts and mocked GitHub regression tests. The tests make no live GitHub requests.
+- With Node.js 22.18+ or 24, run `node --experimental-strip-types --test tests/content.test.mjs tests/github.test.mjs tests/link-preview.test.mjs` for content contracts, mocked GitHub regression tests, and link-preview description tests. The tests make no live GitHub requests.
 - `tests/browser-smoke.mjs` exercises a running production server through a dedicated Chromium/Edge debugging session. Run `node --experimental-strip-types tests/browser-smoke.mjs http://localhost:3100 http://127.0.0.1:9223` after starting that server and a separate headless browser with remote debugging on port 9223. Do not attach it to a personal browsing session. Screenshots go to a temporary directory.
 - Browser checks cover routes, links, 404s, search/filter/reset, keyboard access, metadata, and widths of 320, 375, 768, 1024, and 1440 pixels.

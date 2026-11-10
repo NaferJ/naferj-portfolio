@@ -9,69 +9,67 @@ export type Experience = {
   period: string;
   roles: ExperienceRole[];
   href?: string;
+  previewImage?: string;
 };
 
-export const experienceEn: Experience[] = [
+type Localized<T> = { en: T; es: T };
+
+type ExperienceSource = Omit<Experience, "period" | "roles"> & {
+  period: Localized<string>;
+  roles: Localized<ExperienceRole>[];
+};
+
+const period = (from: string, to: string): Localized<string> => ({
+  en: `${from} to ${to}`,
+  es: to === "Present" ? `${from} a la fecha` : `${from} a ${to}`,
+});
+
+const role = (en: string, es: string, from: string, to: string): Localized<ExperienceRole> => {
+  const p = period(from, to);
+  return {
+    en: { role: en, period: p.en },
+    es: { role: es, period: p.es },
+  };
+};
+
+const experienceData: ExperienceSource[] = [
+  {
+    company: "Talently Lab",
+    logo: "/logos/talently-lab.png",
+    href: "https://talentlylab.com.ar/",
+    previewImage: "/previews/talentlylab.png",
+    period: period("Oct 2026", "Present"),
+    roles: [role("Backend Engineer · EcoBite", "Ingeniero de backend · EcoBite", "Oct 2026", "Present")],
+  },
   {
     company: "Poxyram Studio",
     logo: "/logos/poxyram.svg",
-    period: "Jun 2026 to Present",
     href: "https://www.instagram.com/poxyram/",
-    roles: [
-      {
-        role: "Backend Engineer · Contract",
-        period: "Jun 2026 to Present",
-      },
-    ],
+    period: period("Jun 2026", "Aug 2026"),
+    roles: [role("Backend Engineer · Contract", "Ingeniero de backend · Contrato", "Jun 2026", "Aug 2026")],
   },
   {
     company: "LM SOLUCIONES SAS",
     logo: "/logos/lm-soluciones.svg",
-    period: "Jan 2023 to Oct 2025",
     href: "https://www.lmsoluciones.co/",
+    previewImage: "/previews/lmsoluciones.png",
+    period: period("Jan 2023", "Oct 2025"),
     roles: [
-      {
-        role: "Web Developer",
-        period: "Dec 2023 to Oct 2025",
-      },
-      {
-        role: "Technical Support Apprentice",
-        period: "Jan 2023 to Dec 2023",
-      },
+      role("Web Developer", "Desarrollador web", "Dec 2023", "Oct 2025"),
+      role("Technical Support Apprentice", "Aprendiz de soporte técnico", "Jan 2023", "Dec 2023"),
     ],
   },
 ];
 
-export const experienceEs: Experience[] = [
-  {
-    company: "Poxyram Studio",
-    logo: "/logos/poxyram.svg",
-    period: "Jun 2026 a la fecha",
-    href: "https://www.instagram.com/poxyram/",
-    roles: [
-      {
-        role: "Ingeniero de backend · Contrato",
-        period: "Jun 2026 a la fecha",
-      },
-    ],
-  },
-  {
-    company: "LM SOLUCIONES SAS",
-    logo: "/logos/lm-soluciones.svg",
-    period: "Jan 2023 a Oct 2025",
-    href: "https://www.lmsoluciones.co/",
-    roles: [
-      {
-        role: "Desarrollador web",
-        period: "Dec 2023 a Oct 2025",
-      },
-      {
-        role: "Aprendiz de soporte técnico",
-        period: "Jan 2023 a Dec 2023",
-      },
-    ],
-  },
-];
+const localize = (locale: "en" | "es"): Experience[] =>
+  experienceData.map(({ period: p, roles, ...shared }) => ({
+    ...shared,
+    period: p[locale],
+    roles: roles.map((r) => r[locale]),
+  }));
+
+export const experienceEn: Experience[] = localize("en");
+export const experienceEs: Experience[] = localize("es");
 
 export const experience = experienceEn;
 

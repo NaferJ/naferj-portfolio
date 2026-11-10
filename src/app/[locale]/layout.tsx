@@ -1,12 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { getDescription, getSiteUrl, site } from "@/data/site";
 import { routing } from "@/i18n/routing";
+import { inter } from "@/lib/fonts";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -58,10 +66,20 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
   };
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <a href="#main-content" className="skip-link">Skip to content</a>
-      {children}
-    </NextIntlClientProvider>
+    <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
+      <body className={`${inter.variable} antialiased`}>
+        <NextIntlClientProvider messages={messages}>
+          <SmoothScroll />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+          <a href="#main-content" className="skip-link">Skip to content</a>
+          {children}
+        </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }

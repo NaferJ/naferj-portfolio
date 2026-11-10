@@ -95,7 +95,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
               flex: 1,
             }}
           >
-            <div style={{ display: "flex", fontSize: 15, fontWeight: 500, letterSpacing: 2, color: muted }}>{stat.label.toUpperCase()}</div>
+            <div style={{ display: "flex", fontSize: 15, fontWeight: 500, letterSpacing: 2, color: muted }}>{stat.label.toLocaleUpperCase(locale)}</div>
             <div style={{ display: "flex", fontSize: 42, fontWeight: 600, marginTop: 10 }}>{stat.value}</div>
           </div>
         ))}
@@ -103,7 +103,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 40 }}>
             {socials.map((s) => (
               <div key={s.name} style={{ display: "flex" }}>
-                <svg width="30" height="30" viewBox="0 0 24 24" fill={muted}>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill={muted} aria-hidden="true">
                   <path d={s.path} />
                 </svg>
               </div>

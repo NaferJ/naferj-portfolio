@@ -3,13 +3,17 @@
     "overview": "Inicio",
     "experience": "Experiencia",
     "projects": "Proyectos",
-    "writing": "Escritos"
+    "writing": "Escritos",
+    "switchLanguage": "Cambiar idioma a English"
   },
   "intro": {
     "title": "Desarrollador full stack",
     "intro": "Desarrollador full stack que construye de extremo a extremo — desde la base de datos hasta el despliegue, más algún proyecto paralelo de vez en cuando.",
-    "currentWorkPrefix": "Actualmente liderando el desarrollo backend en",
-    "currentWorkDescription": "donde estoy construyendo una implementación de referencia completa del backend para su plataforma.",
+    "currentWorkPrefix": "Actualmente ingeniero de backend en",
+    "currentWorkDescription": "construyendo la API, la base de datos y el portal para desarrolladores de una plataforma de delivery de comida sustentable.",
+    "previouslyAt": "Antes en",
+    "currentWorkPreviewTitle": "Talently Lab",
+    "currentWorkPreviewDescription": "Empresa de formación en tecnología — el equipo detrás de EcoBite.",
     "headlinePrefix": "Construyendo",
     "headlineSuffix": "y dando vida a las ideas"
   },
@@ -30,6 +34,15 @@
     "empty": "Nuevo trabajo aparecerá aquí pronto."
   },
   "projectCopy": {
+    "ecobite": {
+      "name": "EcoBite",
+      "description": "API y portal para desarrolladores de una plataforma de delivery de comida sustentable.",
+      "sections": [
+        { "title": "La plataforma", "text": "EcoBite conecta a clientes con restaurantes eco-friendly. Construyo el backend: una API REST de restaurantes, zonas de entrega, cuentas y pedidos, donde el servidor calcula el total de cada pedido, los envases y el CO₂ ahorrado." },
+        { "title": "El enfoque", "text": "Express 5 y TypeScript sobre PostgreSQL con Prisma. Un contrato OpenAPI 3.1, renderizado con Scalar, es la base sobre la que trabaja el frontend, y cada versión queda documentada en un changelog público." },
+        { "title": "El resultado", "text": "Versiones publicadas hasta la v1.2.0, con autenticación con límite de intentos, roles de administrador verificados contra la base de datos en cada solicitud, health check y apagado ordenado." }
+      ]
+    },
     "personal-portfolio": {
       "name": "Portafolio personal",
       "description": "Un espacio para mi trabajo, escritos y lo que voy aprendiendo en el camino.",
@@ -105,6 +118,15 @@
     "repositoriesUnavailable": "La actividad de los repositorios principales no está disponible en este momento. Actualiza la página para volver a intentarlo.",
     "noRepositories": "No se encontró actividad en repositorios públicos durante este período.",
     "fallback": "El gráfico de actividad en vivo está tomando un descanso. Todavía puedes explorar mis repositorios y trabajo reciente en GitHub."
+  },
+  "preview": {
+    "pullRequest": "Pull request #{number}",
+    "issue": "Issue #{number}",
+    "compare": "Comparar {range}",
+    "inRepo": "en {repo}",
+    "repository": "Repositorio",
+    "externalLink": "Enlace externo",
+    "opensInNewTab": "(se abre en una pestaña nueva)"
   },
   "footer": {
     "writing": "Escritos"

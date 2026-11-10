@@ -22,6 +22,12 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-rail: var(--rail);
   --color-highlight: var(--highlight);
+  --text-2xs: 0.625rem;
+  --text-caption: 0.6875rem;
+  --text-note: 0.8125rem;
+  --text-body: 0.9375rem;
+  --text-display: 1.75rem;
+  --text-display-lg: 2.125rem;
 }
 
 html {
@@ -286,15 +292,237 @@ button, summary {
   animation: fade-in-up 0.45s ease-out;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--reveal-index, 0) * 70ms);
+  }
+
+  .js [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.scroll-edge {
+  position: sticky;
+  z-index: 30;
+  height: 72px;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.scroll-edge-top {
+  top: 0;
+  margin-bottom: -72px;
+  opacity: 0;
+  background: linear-gradient(to bottom, rgb(10 10 10 / 0.82), rgb(10 10 10 / 0));
+}
+
+.scroll-edge-bottom {
+  bottom: 0;
+  margin-top: -72px;
+  background: linear-gradient(to top, rgb(10 10 10 / 0.82), rgb(10 10 10 / 0));
+}
+
+html[data-scrolled] .scroll-edge-top {
+  opacity: 1;
+}
+
+html[data-at-end] .scroll-edge-bottom {
+  opacity: 0;
+}
+
+.scroll-edge::before,
+.scroll-edge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.scroll-edge::before {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.scroll-edge::after {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.scroll-edge-top::before {
+  mask-image: linear-gradient(to bottom, #000 40%, transparent);
+}
+
+.scroll-edge-top::after {
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 55%);
+}
+
+.scroll-edge-bottom::before {
+  mask-image: linear-gradient(to top, #000 40%, transparent);
+}
+
+.scroll-edge-bottom::after {
+  mask-image: linear-gradient(to top, #000 0%, transparent 55%);
+}
+
+.nav-indicator {
+  transition: none;
+}
+
+.nav-indicator.nav-indicator-ready {
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1), width 450ms cubic-bezier(0.22, 1, 0.36, 1), height 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease;
+}
+
+.motion-icon * {
+  transform-box: view-box;
+}
+
+.motion-icon-home .mi-roof {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-trigger:hover .motion-icon-home .mi-roof,
+.motion-trigger:focus-visible .motion-icon-home .mi-roof {
+  transform: translateY(-1.5px);
+}
+
+.motion-icon-experience {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-icon-experience .mi-handle {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-trigger:hover .motion-icon-experience,
+.motion-trigger:focus-visible .motion-icon-experience {
+  transform: translateY(-1px);
+}
+
+.motion-trigger:hover .motion-icon-experience .mi-handle,
+.motion-trigger:focus-visible .motion-icon-experience .mi-handle {
+  transform: translateY(-1.5px);
+}
+
+.motion-icon-projects [class^="mi-"] {
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-trigger:hover .mi-tl,
+.motion-trigger:focus-visible .mi-tl {
+  transform: translate(-1px, -1px);
+}
+
+.motion-trigger:hover .mi-tr,
+.motion-trigger:focus-visible .mi-tr {
+  transform: translate(1px, -1px);
+}
+
+.motion-trigger:hover .mi-bl,
+.motion-trigger:focus-visible .mi-bl {
+  transform: translate(-1px, 1px);
+}
+
+.motion-trigger:hover .mi-br,
+.motion-trigger:focus-visible .mi-br {
+  transform: translate(1px, 1px);
+}
+
+.motion-icon-writing .mi-right {
+  transform-origin: 14px 12px;
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-trigger:hover .motion-icon-writing .mi-right,
+.motion-trigger:focus-visible .motion-icon-writing .mi-right {
+  transform: scaleX(0.8);
+}
+
+@keyframes mi-pop {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(1.12) rotate(-8deg); }
+  65% { transform: scale(0.96) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.motion-icon-bot {
+  transform-origin: 20% 90%;
+}
+
+.motion-trigger:hover .motion-icon-bot,
+.motion-trigger:focus-visible .motion-icon-bot {
+  animation: mi-pop 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mi-spin {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(0.08); }
+  100% { transform: scaleX(1); }
+}
+
+.motion-icon-globe .mi-meridian {
+  transform-origin: 12px 12px;
+}
+
+.motion-trigger:hover .mi-meridian,
+.motion-trigger:focus-visible .mi-meridian {
+  animation: mi-spin 900ms ease-in-out;
+}
+
+.motion-trigger:hover .motion-icon,
+.motion-trigger:focus-visible .motion-icon {
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-trigger:hover .motion-icon,
+  .motion-trigger:focus-visible .motion-icon,
+  .motion-trigger:hover .motion-icon *,
+  .motion-trigger:focus-visible .motion-icon * {
+    transform: none;
+    animation: none;
+  }
+}
+
+.sticker {
+  transform: rotate(var(--tilt));
+  transition: transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+a:hover .sticker,
+a:focus-visible .sticker {
+  transform: rotate(0deg) translateY(-2px) scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker,
+  a:hover .sticker,
+  a:focus-visible .sticker {
+    transform: none;
+    transition: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
+  .skip-link,
+  .nav-indicator.nav-indicator-ready,
+  .scroll-edge {
+    transition: none;
+  }
+
+  .animate-fade-in-up {
+    animation: none;
+  }
+
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
   }
 }
 
@@ -305,7 +533,7 @@ button, summary {
   }
 
   aside, nav, footer, .skip-link {
-    display: none !important;
+    display: none;
   }
 
   .article-body, .article-body h2, .article-body blockquote {

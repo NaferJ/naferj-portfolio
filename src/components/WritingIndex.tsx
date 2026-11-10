@@ -6,7 +6,7 @@ export function WritingIndex({ posts, locale = "en" }: Readonly<{ posts: Post[];
   const t = useTranslations("writing");
   return (
     <div className="mt-8">
-      <PostList posts={posts} locale={locale} />
+      <PostList posts={posts} locale={locale} revealRows />
       {posts.length === 0 ? <p className="mt-6 text-sm text-muted-foreground">{t("empty")}</p> : null}
     </div>
   );

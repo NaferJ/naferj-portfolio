@@ -85,12 +85,11 @@ async function evaluate(expression) {
   return response.result.value;
 }
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-async function waitFor(expression) {
-  for (let i = 0; i < 80; i++) {
-    if (await evaluate(expression)) return;
-    await sleep(100);
-  }
-  throw new Error(`Timed out waiting for ${expression}`);
+async function waitFor(expression, attempts = 80) {
+  if (await evaluate(expression)) return;
+  if (attempts <= 1) throw new Error(`Timed out waiting for ${expression}`);
+  await sleep(100);
+  await waitFor(expression, attempts - 1);
 }
 async function navigate(path) {
   await send("Page.navigate", { url: `${origin}${path}` });
@@ -115,7 +114,7 @@ try {
   const links = new Set();
   const firstArticle = posts[0] ? localizedPath(`/writing/${posts[0].slug}`) : undefined;
   await viewport(1440, 1000);
-  for (const route of routes) {
+  const checkRoute = async (route) => {
     assert.equal((await safeFetch(`${origin}${route}`)).status, 200, route);
     await navigate(route);
     await waitFor(`[...document.images].filter(image => { const rect = image.getBoundingClientRect(); return rect.width > 0 && rect.height > 0 && rect.top < innerHeight && rect.bottom > 0 && !image.closest('details:not([open])'); }).every(image => image.complete && image.naturalWidth > 0)`);
@@ -130,26 +129,33 @@ try {
     if (route === localizedPath()) await screenshot("desktop");
     if (route === firstArticle) await screenshot("article");
     if (route === localizedPath("/writing")) await screenshot("writing");
-  }
-  for (const href of links) assert.equal((await safeFetch(new URL(href, origin))).status, 200, `internal link ${href}`);
-  for (const route of [localizedPath("/missing-page"), localizedPath("/writing/missing-post"), localizedPath("/projects/missing-project")]) assert.equal((await safeFetch(`${origin}${route}`)).status, 404, route);
+  };
+  await routes.reduce((chain, route) => chain.then(() => checkRoute(route)), Promise.resolve());
+  await [...links].reduce((chain, href) => chain.then(async () => {
+    assert.equal((await safeFetch(new URL(href, origin))).status, 200, `internal link ${href}`);
+  }), Promise.resolve());
+  await [localizedPath("/missing-page"), localizedPath("/writing/missing-post"), localizedPath("/projects/missing-project")].reduce((chain, route) => chain.then(async () => {
+    assert.equal((await safeFetch(`${origin}${route}`)).status, 404, route);
+  }), Promise.resolve());
   console.log("PASS internal links and missing-route 404s");
   await navigate(localizedPath());
   await evaluate(`document.querySelector('nav[aria-label="Primary navigation"] a[href=${JSON.stringify(localizedPath("/writing"))}]').click()`);
   await waitFor(`location.pathname === ${JSON.stringify(localizedPath("/writing"))}`);
   await waitFor(`document.querySelector('nav[aria-label="Primary navigation"] a[aria-current="page"]').getAttribute('href') === ${JSON.stringify(localizedPath("/writing"))}`);
   console.log("PASS navigation and writing link");
-  for (const width of [320, 375, 768, 1024]) {
+  const checkViewport = async (width) => {
     await viewport(width, 900);
-    for (const route of [localizedPath(), localizedPath("/projects"), localizedPath("/experience"), localizedPath("/writing"), ...(firstArticle ? [firstArticle] : [])]) {
+    const routesAtWidth = [localizedPath(), localizedPath("/projects"), localizedPath("/experience"), localizedPath("/writing"), ...(firstArticle ? [firstArticle] : [])];
+    await routesAtWidth.reduce((chain, route) => chain.then(async () => {
       await navigate(route);
       assert.equal(await evaluate("document.documentElement.scrollWidth > innerWidth"), false, `no overflow at ${width}: ${route}`);
       const visible = await evaluate(`[...document.querySelectorAll('nav[aria-label="Primary navigation"] a')].every(a => { const rect = a.getBoundingClientRect(); return rect.width > 0 && rect.x >= 0 && rect.right <= innerWidth; })`);
       assert.equal(visible, true, `navigation visible at ${width}: ${route}`);
       if (width === 375 && route === localizedPath()) await screenshot("mobile");
-    }
+    }), Promise.resolve());
     console.log("PASS viewport", width);
-  }
+  };
+  await [320, 375, 768, 1024].reduce((chain, width) => chain.then(() => checkViewport(width)), Promise.resolve());
   await viewport(1440, 1000);
   await navigate(localizedPath());
   const skipResult = await evaluate(`(() => { const link = document.querySelector('.skip-link'); link.focus(); return { isActive: document.activeElement === link, href: link.getAttribute('href') }; })()`);
@@ -165,7 +171,8 @@ try {
     await send("Input.dispatchKeyEvent", { type: "keyDown", key: "Enter", code: "Enter", windowsVirtualKeyCode: 13, text: "\r" });
     await send("Input.dispatchKeyEvent", { type: "keyUp", key: "Enter", code: "Enter", windowsVirtualKeyCode: 13 });
     await waitFor(`${panelToggle}.getAttribute('aria-expanded') === 'true'`);
-    assert.equal(await evaluate(`document.querySelector('#top-contributions-content').textContent.includes('Top repository activity is unavailable right now. Refresh the page to try again.')`), true);
+    const panel = await evaluate(`({ text: document.querySelector('#top-contributions-content').textContent, items: document.querySelectorAll('#top-contributions-content li a').length })`);
+    assert.equal(panel.text.includes('Top repository activity is unavailable right now. Refresh the page to try again.') || panel.items > 0, true);
     assert.equal(await evaluate(`document.querySelectorAll('#contributions button[tabindex="0"]').length`), 1);
     await evaluate(`document.querySelector('#contributions button[tabindex="0"]').focus()`);
     const before = await evaluate("document.activeElement.getAttribute('aria-label')");

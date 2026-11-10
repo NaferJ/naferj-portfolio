@@ -4,6 +4,7 @@ export type AgentItem = {
   description: string;
   status: string;
   sample?: boolean;
+  preview?: { title?: string; description?: string; image?: string };
 };
 
 export const agentItemsEn: AgentItem[] = [
@@ -11,8 +12,9 @@ export const agentItemsEn: AgentItem[] = [
     name: "Devin as dev agent",
     href: "https://devin.ai",
     description:
-      "Devin Desktop is my IDE, paired with different models depending on the task — GLM-5.2 High, SWE-1.7 Max, GPT-5.6, Claude Sonnet 5.",
+      "Devin Desktop is my IDE, paired with different models depending on the task — SWE-2 High, Claude Opus 5.5, GPT Sol.",
     status: "Live",
+    preview: { title: "Devin", description: "The AI software engineer by Cognition.", image: "/previews/devin.png" },
   },
   {
     name: "Repo rules & agent config",
@@ -26,6 +28,7 @@ export const agentItemsEn: AgentItem[] = [
     description:
       "SonarCloud, GitGuardian, lint, and typecheck gate every PR before merge.",
     status: "Live",
+    preview: { image: "/previews/pr-16.png" },
   },
 ];
 
@@ -34,8 +37,9 @@ export const agentItemsEs: AgentItem[] = [
     name: "Devin como agente de desarrollo",
     href: "https://devin.ai",
     description:
-      "Devin Desktop es mi IDE, emparejado con distintos modelos según la tarea: GLM-5.2 High, SWE-1.7 Max, GPT-5.6, Claude Sonnet 5.",
+      "Devin Desktop es mi IDE, emparejado con distintos modelos según la tarea: SWE-2 High, Claude Opus 5.5, GPT Sol.",
     status: "En uso",
+    preview: { title: "Devin", description: "El ingeniero de software con IA de Cognition.", image: "/previews/devin.png" },
   },
   {
     name: "Reglas del repositorio y configuración del agente",
@@ -49,6 +53,7 @@ export const agentItemsEs: AgentItem[] = [
     description:
       "SonarCloud, GitGuardian, lint y typecheck controlan cada PR antes de fusionarlo.",
     status: "En uso",
+    preview: { image: "/previews/pr-16.png" },
   },
 ];
 
