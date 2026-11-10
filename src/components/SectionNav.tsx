@@ -3,70 +3,80 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Icon } from "@/components/Icon";
+import { useLayoutEffect, useRef } from "react";
+import { MotionIcon } from "@/components/MotionIcon";
+import { SocialLinks } from "@/components/SocialLinks";
 import { site } from "@/data/site";
-
-type SocialLink = {
-  name: "github" | "twitter" | "instagram" | "linkedin" | "coffee";
-  href: string;
-  label: string;
-};
-
-const socialLinks: SocialLink[] = [
-  { name: "github", href: site.github, label: `${site.name} on GitHub (opens in a new tab)` },
-  { name: "twitter", href: site.twitter, label: `${site.name} on X (opens in a new tab)` },
-  { name: "instagram", href: site.instagram, label: `${site.name} on Instagram (opens in a new tab)` },
-  { name: "linkedin", href: site.linkedin, label: `${site.name} on LinkedIn (opens in a new tab)` },
-  { name: "coffee", href: site.coffee, label: `Support ${site.name} (opens in a new tab)` },
-];
 
 export function SectionNav({ locale }: Readonly<{ locale: string }>) {
   const pathname = usePathname();
   const t = useTranslations("nav");
   const otherLocale = locale === "en" ? "es" : "en";
   const newPath = pathname.replace(`/${locale}`, `/${otherLocale}`);
+  const listRef = useRef<HTMLUListElement>(null);
+  const indicatorRef = useRef<HTMLLIElement>(null);
+  const measured = useRef(false);
+
+  useLayoutEffect(() => {
+    const list = listRef.current;
+    const indicator = indicatorRef.current;
+    if (!list || !indicator) return;
+    const update = () => {
+      const active = list.querySelector<HTMLElement>("a[aria-current='page']");
+      if (!active) {
+        indicator.style.opacity = "0";
+        return;
+      }
+      indicator.style.opacity = "1";
+      indicator.style.transform = `translate(${active.offsetLeft}px, ${active.offsetTop}px)`;
+      indicator.style.width = `${active.offsetWidth}px`;
+      indicator.style.height = `${active.offsetHeight}px`;
+      if (!measured.current) {
+        measured.current = true;
+        requestAnimationFrame(() => indicator.classList.add("nav-indicator-ready"));
+      }
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, [pathname]);
 
   return (
-    <header className="border-b border-rail lg:border-r lg:border-b-0">
-      <div className="flex flex-wrap items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:sticky lg:top-0 lg:h-dvh lg:flex-col lg:flex-nowrap lg:justify-start lg:px-3 lg:py-8">
+    <header className="sticky top-0 z-40 border-b border-rail bg-background/75 backdrop-blur-md lg:static lg:z-auto lg:border-r lg:border-b-0 lg:bg-transparent lg:backdrop-blur-none">
+      <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-4 sm:gap-4 sm:px-8 lg:sticky lg:top-0 lg:h-dvh lg:flex-col lg:flex-nowrap lg:justify-start lg:px-3 lg:py-8">
         <nav aria-label="Primary navigation" className="lg:mt-2 lg:w-full">
-          <ul className="flex flex-wrap items-center gap-1 lg:flex-col lg:gap-4">
+          <ul ref={listRef} className="relative flex flex-wrap items-center gap-1 lg:flex-col lg:gap-4">
+            <li ref={indicatorRef} aria-hidden="true" className="nav-indicator pointer-events-none absolute left-0 top-0 opacity-0">
+              <span className="absolute inset-0 rounded-lg bg-muted" />
+              <span className="absolute -left-3 top-1/2 hidden h-5 w-px -translate-y-1/2 bg-highlight lg:block" />
+            </li>
             {site.navigation.map((link) => {
               const href = `/${locale}${link.href === "/" ? "" : link.href}`;
               const active = link.href === "/" ? pathname === `/${locale}` || pathname === `/${locale}/` : pathname === href || pathname.startsWith(`${href}/`);
               return (
                 <li key={link.href} className="lg:w-full">
-                  <Link href={href} aria-current={active ? "page" : undefined} className={`relative flex min-h-11 items-center justify-center gap-2 rounded-lg px-2.5 text-xs transition-colors duration-200 ease-out lg:flex-col lg:gap-1.5 lg:px-1 lg:py-3 lg:text-[10px] ${active ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}>
-                    <Icon name={link.icon} className="hidden size-[18px] sm:block" />
+                  <Link href={href} aria-current={active ? "page" : undefined} className={`motion-trigger relative flex min-h-11 items-center justify-center gap-2 rounded-lg px-2 text-xs transition-colors duration-200 ease-out sm:px-2.5 lg:flex-col lg:gap-1.5 lg:px-1 lg:py-3 lg:text-2xs ${active ? "text-foreground" : "text-muted-foreground hover:bg-muted/40 hover:text-foreground"}`}>
+                    <MotionIcon name={link.icon} className="hidden size-5 sm:block" />
                     <span>{t(link.label)}</span>
-                    {active ? <span aria-hidden="true" className="absolute -left-3 hidden h-5 w-px bg-highlight lg:block" /> : null}
                   </Link>
                 </li>
               );
             })}
           </ul>
         </nav>
-        <div className="flex items-center gap-1 lg:mt-auto lg:flex-col lg:gap-2">
+        <div className="ml-auto flex items-center gap-1 lg:ml-0 lg:mt-auto lg:flex-col lg:gap-2">
+          <span aria-hidden="true" className="hidden h-px w-8 bg-rail lg:mb-1 lg:block" />
           <Link
             href={newPath}
-            className="hidden size-11 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 ease-out hover:bg-muted hover:text-foreground lg:flex"
-            aria-label={`Switch to ${otherLocale === "es" ? "Spanish" : "English"}`}
+            hrefLang={otherLocale}
+            className="motion-trigger flex min-h-11 min-w-11 flex-row items-center justify-center gap-1.5 rounded-lg px-2 text-muted-foreground transition-colors duration-200 ease-out hover:bg-muted/40 hover:text-foreground lg:flex-col lg:gap-0.5 lg:px-1 lg:py-3"
+            aria-label={t("switchLanguage")}
           >
-            <Icon name="globe" className="size-5" />
+            <MotionIcon name="globe" className="size-4 lg:size-5" />
+            <span lang={otherLocale} className="text-xs lg:text-2xs">{otherLocale.toLocaleUpperCase(otherLocale)}</span>
           </Link>
-          {socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={link.label}
-              className="group relative hidden size-11 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-300 ease-out hover:bg-muted hover:text-foreground lg:flex"
-            >
-              <Icon name={link.name} className="absolute size-5 transition-all duration-300 ease-out group-hover:scale-90 group-hover:opacity-0" />
-              <Icon name={link.name} brand className="absolute size-5 scale-90 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100" />
-            </a>
-          ))}
+          <SocialLinks className="hidden lg:flex lg:flex-col lg:items-center lg:gap-2" />
         </div>
       </div>
     </header>

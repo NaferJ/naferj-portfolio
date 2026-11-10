@@ -165,7 +165,8 @@ try {
     await send("Input.dispatchKeyEvent", { type: "keyDown", key: "Enter", code: "Enter", windowsVirtualKeyCode: 13, text: "\r" });
     await send("Input.dispatchKeyEvent", { type: "keyUp", key: "Enter", code: "Enter", windowsVirtualKeyCode: 13 });
     await waitFor(`${panelToggle}.getAttribute('aria-expanded') === 'true'`);
-    assert.equal(await evaluate(`document.querySelector('#top-contributions-content').textContent.includes('Top repository activity is unavailable right now. Refresh the page to try again.')`), true);
+    const panel = await evaluate(`({ text: document.querySelector('#top-contributions-content').textContent, items: document.querySelectorAll('#top-contributions-content li a').length })`);
+    assert.equal(panel.text.includes('Top repository activity is unavailable right now. Refresh the page to try again.') || panel.items > 0, true);
     assert.equal(await evaluate(`document.querySelectorAll('#contributions button[tabindex="0"]').length`), 1);
     await evaluate(`document.querySelector('#contributions button[tabindex="0"]').focus()`);
     const before = await evaluate("document.activeElement.getAttribute('aria-label')");

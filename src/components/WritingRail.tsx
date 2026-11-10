@@ -22,8 +22,8 @@ export function WritingRail({ locale }: Readonly<{ locale: string }>) {
           {posts.map((post) => (
             <li key={post.slug}>
               <Link href={`/${locale}/writing/${post.slug}`} className="group flex flex-col">
-                <span className="text-pretty text-[13px] leading-6 font-normal text-foreground underline decoration-transparent underline-offset-4 transition-[text-decoration-color] group-hover:decoration-foreground/30 group-focus-visible:decoration-foreground/30">{post.title}</span>
-                <span className="mt-1 block text-[11px] text-muted-foreground transition-colors group-hover:text-neutral-400">{readingMinutes(post)} {tArticle("minRead")}{post.sample ? " \u00b7 Sample" : ""}</span>
+                <span className="text-pretty text-note leading-6 font-normal text-foreground underline decoration-transparent underline-offset-4 transition-[text-decoration-color] group-hover:decoration-foreground/30 group-focus-visible:decoration-foreground/30">{post.title}</span>
+                <span className="mt-1 block text-caption text-muted-foreground transition-colors group-hover:text-neutral-400">{readingMinutes(post)} {tArticle("minRead")}{post.sample ? " \u00b7 Sample" : ""}</span>
               </Link>
             </li>
           ))}

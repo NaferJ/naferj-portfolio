@@ -13,6 +13,7 @@ export type Post = {
   category: string;
   sample?: boolean;
   draft?: boolean;
+  cover?: { src: string; alt: string; width: number; height: number };
   body: ArticleBlock[];
 };
 
@@ -33,6 +34,7 @@ export const postsEn: Post[] = [
       "Not because I can't do more. Because it's honest about what I actually build, and it lets the work speak instead of the decoration.",
     date: "2026-09-10",
     category: "Notes",
+    cover: { src: "/writing/flower.jpg", alt: "Grainy, painterly photo of a pale white flower against a blue-grey background.", width: 723, height: 723 },
     body: [
       {
         type: "paragraph",
@@ -73,6 +75,7 @@ export const postsEs: Post[] = [
       "No porque no pueda hacer más. Es porque es honesto sobre lo que realmente construyo, y deja que el trabajo hable en lugar de la decoración.",
     date: "2026-09-10",
     category: "Notas",
+    cover: { src: "/writing/flower.jpg", alt: "Foto granulada y pictórica de una flor blanca pálida sobre un fondo gris azulado.", width: 723, height: 723 },
     body: [
       {
         type: "paragraph",

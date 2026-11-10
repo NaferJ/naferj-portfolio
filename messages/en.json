@@ -3,13 +3,17 @@
     "overview": "Overview",
     "experience": "Experience",
     "projects": "Projects",
-    "writing": "Writing"
+    "writing": "Writing",
+    "switchLanguage": "Switch language to Español"
   },
   "intro": {
     "title": "Full stack developer",
     "intro": "Full stack developer who builds end to end — from database to deployment, plus the occasional side project.",
-    "currentWorkPrefix": "Currently leading backend development at",
-    "currentWorkDescription": "where I'm building a complete backend reference implementation for their platform.",
+    "currentWorkPrefix": "Currently a backend engineer at",
+    "currentWorkDescription": "building the API, database, and developer portal for a sustainable food-delivery platform.",
+    "previouslyAt": "Previously at",
+    "currentWorkPreviewTitle": "Talently Lab",
+    "currentWorkPreviewDescription": "Tech training company — the team behind EcoBite.",
     "headlinePrefix": "Building",
     "headlineSuffix": "and bringing ideas to life"
   },
@@ -30,6 +34,15 @@
     "empty": "New work will appear here soon."
   },
   "projectCopy": {
+    "ecobite": {
+      "name": "EcoBite",
+      "description": "API and developer portal for a sustainable food-delivery platform.",
+      "sections": [
+        { "title": "The platform", "text": "EcoBite connects customers with eco-friendly restaurants. I build the backend: a REST API for restaurants, delivery zones, accounts, and orders, where the server calculates each order's total, packaging, and CO₂ saved." },
+        { "title": "The approach", "text": "Express 5 and TypeScript over PostgreSQL with Prisma. An OpenAPI 3.1 contract, rendered with Scalar, is what the frontend builds against, and every release is documented in a public changelog." },
+        { "title": "The outcome", "text": "Versioned releases up to v1.2.0, with rate-limited authentication, admin roles checked against the database on every request, a health check, and graceful shutdown." }
+      ]
+    },
     "personal-portfolio": {
       "name": "Personal portfolio",
       "description": "A home for my work, writing, and the things I learn along the way.",
@@ -105,6 +118,15 @@
     "repositoriesUnavailable": "Top repository activity is unavailable right now. Refresh the page to try again.",
     "noRepositories": "No public repository activity was found for this period.",
     "fallback": "The live activity graph is taking a break. You can still explore my repositories and recent work on GitHub."
+  },
+  "preview": {
+    "pullRequest": "Pull request #{number}",
+    "issue": "Issue #{number}",
+    "compare": "Compare {range}",
+    "inRepo": "in {repo}",
+    "repository": "Repository",
+    "externalLink": "External link",
+    "opensInNewTab": "(opens in a new tab)"
   },
   "footer": {
     "writing": "Writing"

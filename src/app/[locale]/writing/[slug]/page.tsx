@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
@@ -31,8 +32,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.description,
     alternates: { canonical: siteUrl ? `/${locale}/writing/${post.slug}` : undefined },
     robots: { index: site.indexable && !post.sample, follow: site.indexable && !post.sample },
-    openGraph: { title: post.title, description: post.description },
-    twitter: { card: "summary_large_image", title: post.title, description: post.description },
+    openGraph: { title: post.title, description: post.description, images: post.cover ? [{ url: post.cover.src, width: post.cover.width, height: post.cover.height, alt: post.cover.alt }] : undefined },
+    twitter: { card: "summary_large_image", title: post.title, description: post.description, images: post.cover ? [post.cover.src] : undefined },
   };
 }
 
@@ -52,6 +53,17 @@ export default async function WritingPostPage({ params }: Props) {
         <h1 className="page-title">{post.title}</h1>
         <p className="mt-4 text-sm text-muted-foreground">{formatDate(post.date, locale)} &middot; {readingMinutes(post)} {t("minRead")}{post.sample ? " \u00b7 Sample" : ""}</p>
         {post.sample ? <p className="mt-5 rounded-lg border border-rail bg-muted/40 px-4 py-3 text-xs leading-6 text-muted-foreground">{t("sampleNotice")}</p> : null}
+        {post.cover ? (
+          <Image
+            src={post.cover.src}
+            alt={post.cover.alt}
+            width={post.cover.width}
+            height={post.cover.height}
+            priority
+            sizes="(min-width: 768px) 680px, 100vw"
+            className="mt-8 aspect-[3/2] w-full rounded-xl border border-rail object-cover object-[60%_45%]"
+          />
+        ) : null}
         <div className="article-body mt-8">
           {post.body.map((block) => {
             const key = blockKey(block);
@@ -60,7 +72,7 @@ export default async function WritingPostPage({ params }: Props) {
               case "heading": return <h2 key={key} id={block.id}>{block.text}</h2>;
               case "quote": return <blockquote key={key}>{block.text}</blockquote>;
               case "list": return <ul key={key}>{block.items.map((item) => <li key={item}>{item}</li>)}</ul>;
-              case "code": return <figure key={key}><figcaption className="mb-2 text-[10px] text-muted-foreground">{block.language}</figcaption><pre><code>{block.text}</code></pre></figure>;
+              case "code": return <figure key={key}><figcaption className="mb-2 text-2xs text-muted-foreground">{block.language}</figcaption><pre><code>{block.text}</code></pre></figure>;
               default: return null;
             }
           })}
@@ -73,7 +85,7 @@ export default async function WritingPostPage({ params }: Props) {
           <div className="mt-6 flex flex-col gap-5">
             {morePosts.map((p) => (
               <Link key={p.slug} href={`/${locale}/writing/${p.slug}`} className="group flex flex-col">
-                <h3 className="text-pretty text-[15px] leading-6 font-normal tracking-tight text-foreground underline decoration-transparent underline-offset-4 transition-[text-decoration-color] group-hover:decoration-foreground/30">{p.title}</h3>
+                <h3 className="text-pretty text-body leading-6 font-normal tracking-tight text-foreground underline decoration-transparent underline-offset-4 transition-[text-decoration-color] group-hover:decoration-foreground/30">{p.title}</h3>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:text-neutral-300">{p.description}</p>
               </Link>
             ))}

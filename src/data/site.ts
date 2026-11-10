@@ -11,9 +11,9 @@ export const site = {
   twitter: "https://x.com/NaferJ1",
   coffee: "https://ko-fi.com/naferj",
   currentWork: {
-    name: "Poxyram Studio",
-    href: "https://www.instagram.com/poxyram/",
-    image: "/logos/poxyram.svg",
+    name: "Talently Lab",
+    href: "https://talentlylab.com.ar/",
+    image: "/logos/talently-lab.png",
   },
   navigation: [
     { href: "/", label: "overview", icon: "home" },

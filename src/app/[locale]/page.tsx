@@ -6,6 +6,8 @@ import { Contributions } from "@/components/Contributions";
 import { Intro } from "@/components/Intro";
 import { PostList } from "@/components/PostList";
 import { Projects } from "@/components/Projects";
+import { Reveal } from "@/components/Reveal";
+import { SectionHeading } from "@/components/SectionHeading";
 import { SiteShell } from "@/components/SiteShell";
 import { getPosts } from "@/data/writing";
 
@@ -36,12 +38,20 @@ export default async function Home({ params }: Readonly<{ params: Promise<{ loca
     <SiteShell locale={locale}>
       <div className="space-y-12">
         <Intro />
-        <Suspense fallback={<ContributionsSkeleton />}>
-          <Contributions />
-        </Suspense>
-        <AIAgents />
-        <Projects locale={locale} preview />
-        <WritingPreview posts={posts} locale={locale} />
+        <Reveal index={0}>
+          <Suspense fallback={<ContributionsSkeleton />}>
+            <Contributions />
+          </Suspense>
+        </Reveal>
+        <Reveal index={1}>
+          <AIAgents />
+        </Reveal>
+        <Reveal index={2}>
+          <Projects locale={locale} preview />
+        </Reveal>
+        <Reveal index={3}>
+          <WritingPreview posts={posts} locale={locale} />
+        </Reveal>
       </div>
     </SiteShell>
   );
@@ -53,7 +63,7 @@ function WritingPreview({ posts, locale }: Readonly<{ posts: ReturnType<typeof g
   return (
     <section aria-labelledby="writing-heading">
       <div className="flex items-center justify-between gap-4">
-        <h2 id="writing-heading" className="section-title">{t("writing")}</h2>
+        <SectionHeading id="writing-heading" icon="writing">{t("writing")}</SectionHeading>
       </div>
       <div className="mt-6"><PostList posts={posts} locale={locale} /></div>
       {posts.length === 0 ? <p className="mt-6 text-sm text-muted-foreground">{tWriting("empty")}</p> : null}

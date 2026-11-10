@@ -44,7 +44,7 @@ export function HeatmapClient({ weeks, total }: Readonly<{ weeks: ContributionSu
           ))}
         </div>
       </div>
-      <p aria-hidden="true" className="mt-2 min-h-4 text-[10px] text-muted-foreground">{selected ? describe(selected) : "Hover, tap, or use the arrow keys to explore."}</p>
+      <p aria-hidden="true" className="mt-2 min-h-4 text-2xs text-muted-foreground">{selected ? describe(selected) : "Hover, tap, or use the arrow keys to explore."}</p>
     </section>
   );
 }
