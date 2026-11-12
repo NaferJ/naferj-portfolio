@@ -39,7 +39,14 @@ const experienceData: ExperienceSource[] = [
     href: "https://talentlylab.com.ar/",
     previewImage: "/previews/talentlylab.png",
     period: period("Oct 2026", "Present"),
-    roles: [role("Backend Engineer · EcoBite", "Ingeniero de backend · EcoBite", "Oct 2026", "Present")],
+    roles: [
+      role(
+        "Backend Developer (work simulation) · EcoBite",
+        "Desarrollador backend (simulación laboral) · EcoBite",
+        "Oct 2026",
+        "Present",
+      ),
+    ],
   },
   {
     company: "Poxyram Studio",
@@ -49,14 +56,28 @@ const experienceData: ExperienceSource[] = [
     roles: [role("Backend Engineer · Contract", "Ingeniero de backend · Contrato", "Jun 2026", "Aug 2026")],
   },
   {
+    company: "RedLink Agency",
+    logo: "/logos/redlink.png",
+    href: "https://www.redlinkagency.com/",
+    period: period("Apr 2026", "Jun 2026"),
+    roles: [
+      role(
+        "Co-founder & Lead Developer",
+        "Cofundador y desarrollador principal",
+        "Apr 2026",
+        "Jun 2026",
+      ),
+    ],
+  },
+  {
     company: "LM SOLUCIONES SAS",
     logo: "/logos/lm-soluciones.svg",
     href: "https://www.lmsoluciones.co/",
     previewImage: "/previews/lmsoluciones.png",
-    period: period("Jan 2023", "Oct 2025"),
+    period: period("Oct 2023", "Oct 2025"),
     roles: [
-      role("Web Developer", "Desarrollador web", "Dec 2023", "Oct 2025"),
-      role("Technical Support Apprentice", "Aprendiz de soporte técnico", "Jan 2023", "Dec 2023"),
+      role("Web Developer", "Desarrollador web", "Apr 2024", "Oct 2025"),
+      role("Technical Support Apprentice", "Aprendiz de soporte técnico", "Oct 2023", "Mar 2024"),
     ],
   },
 ];
